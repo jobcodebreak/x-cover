@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
+import MenuBar from "./components/MenuBar";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -64,14 +65,23 @@ a {
   color:inherit
 }
 `;
+const LayoutWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  /* justify-content: space-between; */
+`;
 
-function App() {
+function Layout() {
   return (
     <>
       <GlobalStyle />
-      <Outlet />
+      <LayoutWrapper>
+        <MenuBar />
+        <Outlet />
+      </LayoutWrapper>
     </>
   );
 }
 
-export default App;
+export default Layout;

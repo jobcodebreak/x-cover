@@ -25,7 +25,6 @@ const Center = styled.main`
 export default function ProfilePage() {
   return (
     <Container>
-      <LeftSidebar />
       <CenterProfile />
       <RightSidebar />
     </Container>
