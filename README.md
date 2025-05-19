@@ -1,6 +1,8 @@
 # X 커버
 
-X 커버 화면 클론하기
+X 커버 화면 클론하기 [Figma 목업](https://www.figma.com/design/zDYwKLSeGtmHtvcng0ZIXM/X-Twitter-Profile-Template---Multi-Theme-Design-in-Figma--Community-?node-id=41-1438&t=9IoRmkua410rsoek-0)
+
+![화면](https://github.com/jobcodebreak/x-cover/blob/layout/preview.png?raw=true)
 
 ### 디렉토리 구조
 
@@ -38,7 +40,7 @@ src/-
 
 #### pages
 
-- 메인화면(main_page) 레이아웃. 25.05.19. 용훈 <- 예
+- 메인화면(main_page) 레이아웃. 25.05.19.
 - 검색화면(search_page) 레이아웃
 - 내정보(my_profile) 레이아웃
 - 타유저(user_profile) 레이아웃
