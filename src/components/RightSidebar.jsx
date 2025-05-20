@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ellipsisIcon from "../assets/icons/ellipsis-circle.svg";
 
 export default function RightSidebar() {
   return (
@@ -30,6 +31,17 @@ export default function RightSidebar() {
             </div>
             <FollowButton>Follow</FollowButton>
           </UserRecommendItem>
+          <UserRecommendItem>
+            <Avatar
+              src="https://t2.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/4WWC/image/WnkV1nCsS-LYxi_uqkTxYDagdig.jpg"
+              alt="User3"
+            />
+            <div>
+              <UserName>장영실</UserName>
+              <UserHandle>@jang_youngsil</UserHandle>
+            </div>
+            <FollowButton>Follow</FollowButton>
+          </UserRecommendItem>
         </UserRecommendList>
         <ShowMore>Show more</ShowMore>
       </Section>
@@ -37,10 +49,54 @@ export default function RightSidebar() {
       <Section>
         <SectionTitle>What’s happening</SectionTitle>
         <TrendList>
-          <TrendItem>#ReactJS</TrendItem>
-          <TrendItem>#JavaScript</TrendItem>
-          <TrendItem>#Vite</TrendItem>
-          <TrendItem>#StyledComponents</TrendItem>
+          <TrendItem>
+            <ItemBox>
+              <ItemInfoWrapper>
+                <ItemTag>
+                  <TrendingIn>Trending in Joseon</TrendingIn>
+                  <Itemname>무인정사</Itemname>
+                  <TrendTweets>20.7K posts</TrendTweets>
+                </ItemTag>
+              </ItemInfoWrapper>
+              <EllipsisIcon src={ellipsisIcon} />
+            </ItemBox>
+          </TrendItem>
+          <TrendItem>
+            <ItemBox>
+              <ItemInfoWrapper>
+                <ItemTag>
+                  <TrendingIn>Trending in Joseon</TrendingIn>
+                  <Itemname>박포의 난</Itemname>
+                  <TrendTweets>18.1K posts</TrendTweets>
+                </ItemTag>
+              </ItemInfoWrapper>
+              <EllipsisIcon src={ellipsisIcon} />
+            </ItemBox>
+          </TrendItem>
+          <TrendItem>
+            <ItemBox>
+              <ItemInfoWrapper>
+                <ItemTag>
+                  <TrendingIn>Trending in Joseon</TrendingIn>
+                  <Itemname>한양 대화재</Itemname>
+                  <TrendTweets>43.8K posts</TrendTweets>
+                </ItemTag>
+              </ItemInfoWrapper>
+              <EllipsisIcon src={ellipsisIcon} />
+            </ItemBox>
+          </TrendItem>
+          <TrendItem>
+            <ItemBox>
+              <ItemInfoWrapper>
+                <ItemTag>
+                  <TrendingIn>Trending in Joseon</TrendingIn>
+                  <Itemname>노비종모법</Itemname>
+                  <TrendTweets>2,096 posts</TrendTweets>
+                </ItemTag>
+              </ItemInfoWrapper>
+              <EllipsisIcon src={ellipsisIcon} />
+            </ItemBox>
+          </TrendItem>
         </TrendList>
         <ShowMore>Show more</ShowMore>
       </Section>
@@ -55,7 +111,7 @@ const SidebarContainer = styled.aside`
   flex: 1;
   min-width: 350px;
   height: fit-content;
-  padding: 20px;
+  padding: 20px 0px;
 `;
 
 const Section = styled.section`
@@ -66,6 +122,7 @@ const Section = styled.section`
 `;
 
 const SectionTitle = styled.h4`
+  font-size: 20px;
   font-weight: 700;
   margin-bottom: 12px;
 `;
@@ -76,10 +133,11 @@ const TrendList = styled.ul`
 `;
 
 const TrendItem = styled.li`
-  padding: 6px 0;
+  padding: 6px 14px;
+  border-radius: 10px;
   cursor: pointer;
   &:hover {
-    text-decoration: underline;
+    background-color: rgba(0, 0, 0, 0.1);
   }
 `;
 
@@ -92,11 +150,11 @@ const UserRecommendItem = styled.li`
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  padding: 6px 14px;
+  border-radius: 20px;
   cursor: pointer;
-
   &:hover {
-    background-color: #e8f5fd;
-    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.1);
   }
 `;
 
@@ -136,4 +194,37 @@ const FollowButton = styled.div`
   &:hover {
     background-color: #333;
   }
+`;
+
+const Itemname = styled.div`
+  font-size: 15px;
+  font-weight: 900;
+  margin-bottom: 7px;
+`;
+
+const TrendingIn = styled.div`
+  margin-bottom: 5px;
+  color: #5b6b78;
+  font-size: 13px;
+`;
+
+const TrendTweets = styled.div`
+  margin-bottom: 5px;
+  color: #5b6b78;
+  font-size: 13px;
+`;
+
+const ItemTag = styled.div``;
+
+const ItemInfoWrapper = styled.div``;
+
+const ItemBox = styled.div`
+  display: flex;
+`;
+
+const EllipsisIcon = styled.img`
+  color: black;
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
 `;
