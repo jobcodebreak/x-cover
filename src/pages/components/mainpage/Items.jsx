@@ -48,11 +48,7 @@ const ItemsImg = styled.img`
   height: 150px;
   border-radius: 20px;
 `;
-const AlignItmesCenter = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 5px;
-`;
+
 const ItemsIconsWrapper = styled.div`
   display: flex;
   justify-content: space-around;
@@ -66,6 +62,65 @@ const ItemsIconsWrapper = styled.div`
 const IconsImg = styled.img`
   width: 20px;
   height: 20px;
+  &:hover {
+    border-radius: 10px;
+  }
+`;
+const blueFilter = `
+  filter: brightness(0) saturate(100%) invert(70%) sepia(26%) 
+  saturate(5472%) hue-rotate(168deg) brightness(94%) contrast(97%);
+`;
+
+const greenFilter = `
+  filter: brightness(0) saturate(100%) invert(59%) sepia(90%) 
+  saturate(355%) hue-rotate(72deg) brightness(91%) contrast(90%);
+`;
+
+const pinkFilter = `
+  filter: brightness(0) saturate(100%) invert(61%) sepia(50%) 
+  saturate(474%) hue-rotate(292deg) brightness(101%) contrast(96%);
+`;
+
+const AlignItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+`;
+
+const BlueItem = styled(AlignItem)`
+  &:hover {
+    span {
+      color: #2ab9fc;
+    }
+    img {
+      ${blueFilter}
+    }
+  }
+`;
+
+const GreenItem = styled(AlignItem)`
+  &:hover {
+    span {
+      color: #22c55e;
+    }
+    img {
+      ${greenFilter}
+    }
+  }
+`;
+
+const PinkItem = styled(AlignItem)`
+  &:hover {
+    span {
+      color: #ec4899;
+    }
+    img {
+      ${pinkFilter}
+    }
+  }
 `;
 
 const imgItems = [
@@ -121,22 +176,26 @@ function Items() {
           </ItemsImgWrapper>
 
           <ItemsIconsWrapper>
-            <AlignItmesCenter>
+            <BlueItem>
               <IconsImg src={chatIcon} /> <span>3</span>
-            </AlignItmesCenter>
-            <AlignItmesCenter>
+            </BlueItem>
+            <GreenItem>
               <IconsImg src={arrowRoundedIcon} /> <span>1.7k</span>
-            </AlignItmesCenter>
-            <AlignItmesCenter>
+            </GreenItem>
+            <PinkItem>
               <IconsImg src={heartIcon} /> <span>2.9k</span>
-            </AlignItmesCenter>
-            <AlignItmesCenter>
+            </PinkItem>
+            <BlueItem>
               <IconsImg src={eyeIcon} /> <span>105k</span>
-            </AlignItmesCenter>
-            <AlignItmesCenter>
-              <IconsImg src={bookMarkIcon} />
-              <IconsImg src={shareIcon} />
-            </AlignItmesCenter>
+            </BlueItem>
+            <div style={{ display: "flex", gap: "5px" }}>
+              <BlueItem>
+                <IconsImg src={bookMarkIcon} />
+              </BlueItem>
+              <BlueItem>
+                <IconsImg src={shareIcon} />
+              </BlueItem>
+            </div>
           </ItemsIconsWrapper>
         </PostWrapper>
       ))}
