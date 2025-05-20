@@ -3,6 +3,7 @@ import App from "./App";
 import MainPage from "./pages/MainPage";
 import ProfilePage from "./pages/ProfilePage";
 import SearchPage from "./pages/SearchPage";
+import Layout from "./Layout";
 
 // 라우터 컴포넌트
 const router = createBrowserRouter([
