@@ -1,7 +1,8 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import Layout from "./Layout";
+import { useEffect } from "react";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -67,6 +68,20 @@ a {
 `;
 
 function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const { pathname } = location;
+
+    const titleMap = {
+      "/": "X / Home",
+      "/profile": "X / Profile",
+      "/search": "X / Explore",
+    };
+
+    document.title = titleMap[pathname] || "X";
+  }, [location.pathname]);
+
   return (
     <>
       <GlobalStyle />
