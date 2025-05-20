@@ -39,6 +39,7 @@ const TabItem = styled.div`
   color: ${(props) => (props.active ? "black" : "#657786")};
   cursor: pointer;
   position: relative;
+  transition: background-color 0.2s ease;
   cursor: pointer;
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);

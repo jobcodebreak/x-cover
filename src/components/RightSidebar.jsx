@@ -132,6 +132,7 @@ const TrendList = styled.ul`
 const TrendItem = styled.li`
   padding: 6px 14px;
   border-radius: 10px;
+  transition: background-color 0.2s ease;
   cursor: pointer;
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
@@ -149,6 +150,7 @@ const UserRecommendItem = styled.li`
   margin-bottom: 10px;
   padding: 6px 14px;
   border-radius: 20px;
+  transition: background-color 0.2s ease;
   cursor: pointer;
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
