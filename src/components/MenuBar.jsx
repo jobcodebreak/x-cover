@@ -20,7 +20,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  gap: 20px;
+  gap: 10px;
   padding: 20px;
 `;
 
@@ -36,22 +36,30 @@ const UserImg = styled.img`
 const IconContainer = styled.button`
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
   border: none;
   background-color: transparent;
   font-size: 20px;
+  padding: 10px;
   cursor: pointer;
-
   &:hover {
-    background-color: transparent;
+    background-color: whitesmoke;
+
+    border-radius: 20px;
   }
 `;
 const PostBtn = styled.button`
-  border-radius: 20px;
-  padding: 10px;
-  background-color: #2ab9fc;
+  border-radius: 30px;
+  padding: 15px 20px;
+  background-color: black;
   color: white;
   border: none;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  &:hover {
+    background-color: #292828;
+  }
 `;
 
 const Logo = styled.button`
@@ -87,7 +95,7 @@ const DisplayName = styled.div`
 
 const Username = styled.div`
   color: gray;
-  font-size: 15px;
+  font-size: 10px;
 `;
 const menuItems = [
   { label: "Home", icon: homeIcon, fillIcon: fillHomeIcon, path: "/" },
