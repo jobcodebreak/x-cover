@@ -1,15 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import LeftSidebar from "../components/LeftSidebar";
+// import LeftSidebar from "../components/LeftSidebar"; 빈화면 오류로 해당코드 주석처리했습니다.
 import RightSidebar from "../components/RightSidebar";
 import CenterProfile from "../components/CenterProfile";
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
   gap: 20px;
 `;
 

@@ -45,7 +45,7 @@ export default ProfilePage;
 const Container = styled.div`
   font-family: system-ui, sans-serif;
   width: 600px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
 `;
