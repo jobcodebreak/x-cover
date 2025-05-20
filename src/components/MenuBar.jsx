@@ -6,13 +6,15 @@ import messageIcon from "../assets/icons/message.svg";
 import listIcon from "../assets/icons/list.svg";
 import bookmarkIcon from "../assets/icons/bookmark.svg";
 import usersIcon from "../assets/icons/users.svg";
-import profileIcon from "../assets/icons/profile.svg";
 import moreIcon from "../assets/icons/more.svg";
 import boltIcon from "../assets/icons/bolt.svg";
 import logo from "../assets/xLogo.png";
 import ellipsisIcon from "../assets/icons/ellipsis-circle.svg";
-import userIcon from "../assets/icons/user.svg";
-import { Link } from "react-router-dom";
+import profileIcon from "../assets/icons/user.svg";
+import fillProfileIcon from "../assets/icons/fillProfile.svg";
+import fillHomeIcon from "../assets/icons/fillHome.svg";
+import fillMagnifying from "../assets/icons/fillMagnifying-glass.svg";
+import { Link, useLocation } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -36,12 +38,12 @@ const IconContainer = styled.button`
   align-items: center;
   gap: 20px;
   border: none;
-  background-color: white;
+  background-color: transparent;
   font-size: 20px;
   cursor: pointer;
 
   &:hover {
-    background-color: #f5f5f5;
+    background-color: transparent;
   }
 `;
 const PostBtn = styled.button`
@@ -72,18 +74,6 @@ const UserInfoWrapper = styled.div`
   gap: 10px;
 `;
 
-const UserDetail = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  p {
-    font-size: 10px;
-    color: #99989887;
-  }
-  span {
-    font-weight: bold;
-  }
-`;
 const NameTag = styled.div`
   display: flex;
   flex-direction: column;
@@ -100,19 +90,31 @@ const Username = styled.div`
   font-size: 15px;
 `;
 const menuItems = [
-  { label: "Home", icon: homeIcon, path: "/" },
-  { label: "Explore", icon: magnifyingIcon, path: "/search" },
+  { label: "Home", icon: homeIcon, fillIcon: fillHomeIcon, path: "/" },
+  {
+    label: "Explore",
+    icon: magnifyingIcon,
+    fillIcon: fillMagnifying,
+    path: "/search",
+  },
   { label: "Notification", icon: bellIcon },
   { label: "Messages", icon: messageIcon },
   { label: "Lists", icon: listIcon },
   { label: "Bookmarks", icon: bookmarkIcon },
   { label: "Communities", icon: usersIcon },
   { label: "Verified Orgs", icon: boltIcon },
-  { label: "Profile", icon: profileIcon, path: "/profile" },
+  {
+    label: "Profile",
+    icon: profileIcon,
+    fillIcon: fillProfileIcon,
+    path: "/profile",
+  },
   { label: "More", icon: moreIcon },
 ];
 
 function MenuBar() {
+  const location = useLocation();
+  const currentPath = location.pathname;
   return (
     <Container>
       <Logo>
@@ -121,7 +123,14 @@ function MenuBar() {
       {menuItems.map((item) => (
         <Link to={item.path} key={item.label}>
           <IconContainer>
-            <Img src={item.icon} alt={item.label} />
+            <Img
+              src={
+                item.path && currentPath === item.path
+                  ? item.fillIcon
+                  : item.icon
+              }
+              alt={item.label}
+            />
             <span>{item.label}</span>
           </IconContainer>
         </Link>
