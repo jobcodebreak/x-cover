@@ -74,9 +74,9 @@ function App() {
     const { pathname } = location;
 
     const titleMap = {
-      "/": "X / Home",
-      "/profile": "X / Profile",
-      "/search": "X / Explore",
+      "/": "Home / X",
+      "/profile": "Profile / X",
+      "/search": "Explore / X",
     };
 
     document.title = titleMap[pathname] || "X";
