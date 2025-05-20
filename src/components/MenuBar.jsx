@@ -36,12 +36,12 @@ const IconContainer = styled.button`
   align-items: center;
   gap: 20px;
   border: none;
-  background-color: white;
+  background-color: transparent;
   font-size: 20px;
   cursor: pointer;
 
   &:hover {
-    background-color: #f5f5f5;
+    background-color: transparent;
   }
 `;
 const PostBtn = styled.button`

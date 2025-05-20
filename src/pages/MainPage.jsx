@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import RightSidebar from "../components/RightSidebar";
-import leftArrow from "../assets/icons/arrow-left.svg";
 import { useState } from "react";
 import gifIcon from "../assets/icons/gif.svg";
 import photoIcon from "../assets/icons/photo.svg";
 import locationIcon from "../assets/icons/location.svg";
 import smileIcon from "../assets/icons/smile.svg";
 import fireIcon from "../assets/icons/fire.svg";
+import Items from "./components/mainpage/Items";
 
 const Container = styled.div`
   background: white;
@@ -39,6 +39,10 @@ const ShowPostWrapper = styled.div`
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  &:hover {
+    background-color: whitesmoke;
+  }
   span {
     color: #2ab9fc;
   }
@@ -110,6 +114,10 @@ const PostBtn = styled.button`
   font-weight: bold;
   border: none;
   margin: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: black;
+  }
 `;
 
 const IconsImg = styled.img`
@@ -120,7 +128,9 @@ const IconsWrapper = styled.div`
   display: flex;
   gap: 10px;
   margin: 10px 60px;
+  cursor: pointer;
 `;
+
 function MainPage() {
   const [activeTab, setActiveTab] = useState("forYou");
   return (
@@ -153,6 +163,7 @@ function MainPage() {
         <ShowPostWrapper>
           <span>Show 140 posts</span>
         </ShowPostWrapper>
+        <Items />
       </MainContainer>
       <RightSidebar />
     </Container>
