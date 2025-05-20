@@ -63,9 +63,15 @@ export default PostCard;
 
 // ======================= styled-components =========================
 const CardContainer = styled.div`
+  max-width: 600px;
   display: flex;
   padding: 16px;
   border-bottom: 1px solid #e1e8ed;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
 `;
 
 const ProfileImage = styled.img`

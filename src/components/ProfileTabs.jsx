@@ -4,9 +4,7 @@ import styled from "styled-components";
 
 const tabs = ["Posts", "Replies", "Highlights", "Articles", "Media", "Likes"];
 
-const ProfileTabs = () => {
-  const [activeTab, setActiveTab] = useState("Posts");
-
+const ProfileTabs = ({ activeTab, setActiveTab }) => {
   return (
     <TabsContainer>
       {tabs.map((tab) => (
