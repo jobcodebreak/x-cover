@@ -160,10 +160,14 @@ function MainPage() {
             <PostBtn>post</PostBtn>
           </IconsWrite>
         </PostWrapper>
-        <ShowPostWrapper>
-          <span>Show 140 posts</span>
-        </ShowPostWrapper>
-        <Items />
+        {activeTab === "forYou" && (
+          <>
+            <ShowPostWrapper>
+              <span>Show 140 posts</span>
+            </ShowPostWrapper>
+            <Items />
+          </>
+        )}
       </MainContainer>
       <RightSidebar />
     </Container>
