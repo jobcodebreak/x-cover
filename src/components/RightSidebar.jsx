@@ -31,6 +31,17 @@ export default function RightSidebar() {
             </div>
             <FollowButton>Follow</FollowButton>
           </UserRecommendItem>
+          <UserRecommendItem>
+            <Avatar
+              src="https://t2.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/4WWC/image/WnkV1nCsS-LYxi_uqkTxYDagdig.jpg"
+              alt="User3"
+            />
+            <div>
+              <UserName>장영실</UserName>
+              <UserHandle>@jang_youngsil</UserHandle>
+            </div>
+            <FollowButton>Follow</FollowButton>
+          </UserRecommendItem>
         </UserRecommendList>
         <ShowMore>Show more</ShowMore>
       </Section>
@@ -69,6 +80,18 @@ export default function RightSidebar() {
                   <TrendingIn>Trending in Joseon</TrendingIn>
                   <Itemname>한양 대화재</Itemname>
                   <TrendTweets>43.8K posts</TrendTweets>
+                </ItemTag>
+              </ItemInfoWrapper>
+              <EllipsisIcon src={ellipsisIcon} />
+            </ItemBox>
+          </TrendItem>
+          <TrendItem>
+            <ItemBox>
+              <ItemInfoWrapper>
+                <ItemTag>
+                  <TrendingIn>Trending in Joseon</TrendingIn>
+                  <Itemname>노비종모법</Itemname>
+                  <TrendTweets>2,096 posts</TrendTweets>
                 </ItemTag>
               </ItemInfoWrapper>
               <EllipsisIcon src={ellipsisIcon} />
@@ -127,11 +150,11 @@ const UserRecommendItem = styled.li`
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  padding: 6px 14px;
+  border-radius: 20px;
   cursor: pointer;
-
   &:hover {
-    background-color: #e8f5fd;
-    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.1);
   }
 `;
 
