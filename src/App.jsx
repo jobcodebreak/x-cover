@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
+import Layout from "./Layout";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -69,7 +70,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Outlet />
+      <Layout />
     </>
   );
 }
