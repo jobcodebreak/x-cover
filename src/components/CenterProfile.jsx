@@ -7,7 +7,7 @@ const ProfilePage = () => {
       <Header>
         <BackIcon />
         <HeaderInfo>
-          <Name>KingSejong</Name>
+          <Name>세종대왕</Name>
           <Tweets>25.6K posts</Tweets>
         </HeaderInfo>
       </Header>
@@ -74,6 +74,8 @@ const HeaderInfo = styled.div`
 
 const Name = styled.div`
   font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 5px;
 `;
 
 const Tweets = styled.div`
@@ -110,11 +112,13 @@ const NameTag = styled.div`
 const DisplayName = styled.div`
   font-size: 20px;
   font-weight: bold;
+  margin-bottom: 5px;
 `;
 
 const Username = styled.div`
   color: gray;
   font-size: 15px;
+  font-weight: 500;
 `;
 
 const Bio = styled.div`
