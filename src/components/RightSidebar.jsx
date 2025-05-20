@@ -39,6 +39,17 @@ export default function RightSidebar() {
             </div>
             <FollowButton>Follow</FollowButton>
           </UserRecommendItem>
+          <UserRecommendItem>
+            <Avatar
+              src="https://i.namu.wiki/i/vpUa0g7EoXzqchiUVKsRW74FQDQ9e2LgMoJMduYKddgaf29SGt1vOBn1ise7MKXyJR9tf-_FADCpi2SrqwNPT1pJCP0M6-hTYY6z8csebJ6LX1iS8zUW6WD18KK81ohBwqVoOJPG75wThC9F-ar4UA.webp"
+              alt="User3"
+            />
+            <div>
+              <UserName>이황</UserName>
+              <UserHandle>@yi_hwang</UserHandle>
+            </div>
+            <FollowButton>Follow</FollowButton>
+          </UserRecommendItem>
         </UserRecommendList>
         <ShowMore>Show more</ShowMore>
       </Section>
@@ -174,10 +185,16 @@ const UserHandle = styled.div`
 `;
 
 const ShowMore = styled.div`
-  margin-top: 30px;
+  margin-top: 20px;
   font-size: 15px;
   color: #34a5f1;
+  padding: 10px 14px;
+  border-radius: 20px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
 `;
 
 const FollowButton = styled.div`
@@ -189,6 +206,7 @@ const FollowButton = styled.div`
   border-radius: 20px;
   font-weight: bold;
   border: none;
+  transition: background-color 0.2s ease;
   cursor: pointer;
   &:hover {
     background-color: #333;
