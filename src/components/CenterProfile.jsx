@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { FaArrowLeft, FaCalendarAlt } from "react-icons/fa";
+import ProfileTabs from "./ProfileTabs";
 
 const ProfilePage = () => {
   return (
@@ -11,10 +12,8 @@ const ProfilePage = () => {
           <Tweets>25.6K posts</Tweets>
         </HeaderInfo>
       </Header>
-
       <Banner />
       <Avatar src="https://mblogthumb-phinf.pstatic.net/MjAyNTAxMjJfMTg4/MDAxNzM3NTQ1NzY1MDc0.Pgcv6JXSxrh1KHXVB2c2X5rJ8FHDrsvsQ5-35AWa0asg.urpL4d0Xau_DkMR-UDeFJT09h0whunwWcezTf9wawu0g.JPEG/image.JPEG?type=w800" />
-
       <ProfileContent>
         <NameTag>
           <DisplayName>세종대왕</DisplayName>
@@ -34,6 +33,7 @@ const ProfilePage = () => {
           </span>
         </FollowStats>
       </ProfileContent>
+      <ProfileTabs />
     </Container>
   );
 };
