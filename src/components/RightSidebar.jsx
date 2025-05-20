@@ -55,6 +55,7 @@ const SidebarContainer = styled.aside`
   flex: 1;
   min-width: 350px;
   height: fit-content;
+  padding: 20px;
 `;
 
 const Section = styled.section`
