@@ -24,6 +24,8 @@ const ProfileTabs = () => {
 
 export default ProfileTabs;
 
+// ======================= styled-components =========================
+
 const TabsContainer = styled.div`
   display: flex;
   justify-content: space-around;
@@ -32,11 +34,15 @@ const TabsContainer = styled.div`
 `;
 
 const TabItem = styled.div`
-  padding: 12px 0;
+  padding: 15px 20px;
   font-weight: ${(props) => (props.active ? "bold" : "normal")};
   color: ${(props) => (props.active ? "black" : "#657786")};
   cursor: pointer;
   position: relative;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 
   &::after {
     content: "";

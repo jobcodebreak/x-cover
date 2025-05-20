@@ -1,10 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import ellipsisIcon from "../assets/icons/ellipsis-circle.svg";
+import searchIcon from "../assets/icons/fillMagnifying-glass.svg";
 
 export default function RightSidebar() {
   return (
     <SidebarContainer>
+      <SearchBarWrapper>
+        <SearchInputWrapper>
+          <SearchIconImg src={searchIcon} alt="Search" />
+          <SearchInput type="text" placeholder="Search" />
+        </SearchInputWrapper>
+      </SearchBarWrapper>
+
       <Section>
         <SectionTitle>You might like</SectionTitle>
         <UserRecommendList>
@@ -28,17 +36,6 @@ export default function RightSidebar() {
             <div>
               <UserName>신사임당</UserName>
               <UserHandle>@shin_saimdang</UserHandle>
-            </div>
-            <FollowButton>Follow</FollowButton>
-          </UserRecommendItem>
-          <UserRecommendItem>
-            <Avatar
-              src="https://t2.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/4WWC/image/WnkV1nCsS-LYxi_uqkTxYDagdig.jpg"
-              alt="User3"
-            />
-            <div>
-              <UserName>장영실</UserName>
-              <UserHandle>@jang_youngsil</UserHandle>
             </div>
             <FollowButton>Follow</FollowButton>
           </UserRecommendItem>
@@ -227,4 +224,40 @@ const EllipsisIcon = styled.img`
   width: 20px;
   height: 20px;
   margin-left: auto;
+`;
+
+const SearchBarWrapper = styled.div`
+  padding: 12px 16px;
+`;
+
+const SearchInputWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  padding: 8px 12px;
+  border: 1px solid #ccd6dd;
+
+  &:focus-within {
+    border-color: #1d9bf0;
+  }
+`;
+
+const SearchInput = styled.input`
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 15px;
+  color: #0f1419;
+  width: 100%;
+
+  &::placeholder {
+    color: #536471;
+  }
+`;
+
+const SearchIconImg = styled.img`
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  opacity: 0.6;
 `;
