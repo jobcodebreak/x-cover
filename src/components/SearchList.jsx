@@ -20,17 +20,16 @@ const SearchList = () => {
   return (
     <Container>
       <Header>
-        <BackIcon />
         <HeaderSearch>
+
          <Input placeholder={"검색"}  />
-         {/* <button><FaSearch size={14} style={{ marginRight: "4px" }} /></button> */}
+         {/* //아이콘 들어갈자리 */}
         </HeaderSearch>
       </Header>
-
       <TabMenu/>
       <ContentWrap>
         <ConListWrap>
-          <h3>Top</h3>
+          {/* <h3>Top</h3>
           <ItemList>
             <UserRecommendItem>
               <Avatar>
@@ -81,7 +80,7 @@ const SearchList = () => {
             <a href="#">
               View all
             </a>
-            </ViewAll>
+            </ViewAll> */}
         </ConListWrap>
   
       </ContentWrap>
@@ -101,11 +100,10 @@ const Container = styled.div`
 
 const Header = styled.div`
   width: 598px;
-  display: flex;
   align-items: center;
-  padding: 12px;
+  // padding: 12px;
   background: white;
-  position: fixed;
+  position: sticky;
   top: 0;
  // border-bottom: 1px solid #ddd;
   z-index: 99999;
@@ -118,7 +116,8 @@ const BackIcon = styled(FaArrowLeft)`
 `;
 
 const HeaderSearch = styled.div`
-  
+    display: flex;
+    padding:10px;
 `;
 
 const ContentWrap = styled.div`
