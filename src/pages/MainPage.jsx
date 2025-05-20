@@ -57,11 +57,6 @@ const Tab = styled.button`
   font-size: 16px;
   cursor: pointer;
   border-width: 10px;
-  border-bottom: 2px solid
-    ${({ active }) => (active ? "#2ab9fc" : "transparent")};
-  color: ${({ active }) => (active ? "black" : "gray")};
-  transition: border-color 0.2s ease;
-
   &:hover {
     background-color: #f7f7f7;
   }
@@ -73,7 +68,7 @@ const TabText = styled.span`
     content: "";
     position: absolute;
     left: 0;
-    bottom: -20px;
+    bottom: -18px;
     height: 4px;
     width: 100%;
     background-color: ${({ active }) => (active ? "#2ab9fc" : "transparent")};
