@@ -285,14 +285,22 @@ const Header = styled.div`
 `;
 
 const BackIcon = styled(FaArrowLeft)`
-  font-size: 18px;
+  width: 35px;
+  height: 35px;
+  padding: 10px;
   margin-right: 16px;
+  border-radius: 50%;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const HeaderInfo = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 10px;
 `;
 
 const Name = styled.div`

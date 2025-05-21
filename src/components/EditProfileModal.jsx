@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FiCamera, FiX } from "react-icons/fi";
 import { ChevronRight, X } from "lucide-react";
+import FloatingLabelInput from "./FloatingLabelInput";
 
 function EditProfileModal({ onClose }) {
+  const [name, setName] = useState("");
+  const [bio, setBio] = useState("");
+  const [location, setLocation] = useState("");
+  const [website, setWebsite] = useState("");
   return (
     <Overlay onClick={onClose}>
       <Modal onClick={(e) => e.stopPropagation()}>
@@ -35,16 +40,45 @@ function EditProfileModal({ onClose }) {
 
         <Form>
           <InputWrapper>
-            <Input placeholder="Name" />
+            <FloatingLabelInput
+              label="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              type="text"
+              maxLength={50}
+              showCharCount={true}
+            />
           </InputWrapper>
           <InputWrapper>
-            <Input className="bioInput" placeholder="Bio" />
+            <FloatingLabelInput
+              label="Bio"
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
+              type="textarea"
+              height="110px"
+              maxLength={160}
+              showCharCount={true}
+            />
           </InputWrapper>
           <InputWrapper>
-            <Input placeholder="Location" />
+            <FloatingLabelInput
+              label="Location"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              type="text"
+              maxLength={30}
+              showCharCount={true}
+            />
           </InputWrapper>
           <InputWrapper>
-            <Input placeholder="Website" />
+            <FloatingLabelInput
+              label="Website"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              type="text"
+              maxLength={100}
+              showCharCount={true}
+            />
           </InputWrapper>
           <SettingItem>
             <BirthDate>
@@ -88,6 +122,27 @@ const Modal = styled.div`
   border-radius: 16px;
   overflow-y: auto;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+
+  /* ✅ Twitter 스타일 스크롤바 */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(83, 100, 113, 0.4);
+    border-radius: 9999px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(83, 100, 113, 0.6);
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba(83, 100, 113, 0.4) transparent;
 `;
 
 const Header = styled.div`
@@ -244,6 +299,7 @@ const Input = styled.input`
     resize: none;
   }
 `;
+
 const SettingItem = styled.div`
   display: flex;
   justify-content: space-between;
