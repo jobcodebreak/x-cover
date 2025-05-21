@@ -8,7 +8,7 @@ import bookmarkIcon from "../assets/icons/bookmark.svg";
 import usersIcon from "../assets/icons/users.svg";
 import moreIcon from "../assets/icons/more.svg";
 import boltIcon from "../assets/icons/bolt.svg";
-import logo from "../assets/xLogo.png";
+import logoIcon from "../assets/icons/logo.svg";
 import ellipsisIcon from "../assets/icons/ellipsis-circle.svg";
 import profileIcon from "../assets/icons/user.svg";
 import fillProfileIcon from "../assets/icons/fillProfile.svg";
@@ -133,7 +133,7 @@ function MenuBar() {
   return (
     <Container>
       <Logo>
-        <Img src={logo}></Img>
+        <Img src={logoIcon}/>
       </Logo>
       {menuItems.map((item) => (
         <Link to={item.path} key={item.label}>
