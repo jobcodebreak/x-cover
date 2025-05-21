@@ -65,4 +65,5 @@ src/-
 
 - react(19.1.0) : React
 - react-router-dom(7.6.0) : React Router
-- modern-css-reset(1.4.0) : CSS reset
+- createGlobalStyle (styled-components(6.1.18)) : CSS reset
+- react-icons(5.5.0) : Icons
