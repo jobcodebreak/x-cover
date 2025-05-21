@@ -27,7 +27,14 @@ src/-
   *--- dev
         |
         *--- layout *--- mainpage
-        *---
+        *---  feature
+               |
+               *--- modal
+               |
+               *--- carousel
+
+
+
 ```
 
 ### 일정
