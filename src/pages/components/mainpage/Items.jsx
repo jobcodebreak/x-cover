@@ -5,7 +5,11 @@ import bookMarkIcon from "../../../assets/icons/bookmark.svg";
 import heartIcon from "../../../assets/icons/heart.svg";
 import eyeIcon from "../../../assets/icons/eye.svg";
 import shareIcon from "../../../assets/icons/share.svg";
+import XIcon from "../../../assets/icons/x.svg";
 import xLogo from "../../../assets/xLogo.png";
+import { useState } from "react";
+import PostComponents from "./PostComponents";
+import ModalChat from "./ModalChat";
 
 const PostWrapper = styled.div`
   display: flex;
@@ -91,6 +95,8 @@ const AlignItem = styled.div`
 `;
 
 const BlueItem = styled(AlignItem)`
+  border: none;
+  background-color: transparent;
   &:hover {
     span {
       color: #2ab9fc;
@@ -154,8 +160,34 @@ const imgItems = [
     images: [xLogo, xLogo, xLogo],
   },
 ];
-
+const ModalHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  span {
+    font-size: 14px;
+    color: #2ab9fc;
+    margin-right: 10px;
+  }
+`;
+const ModalPostWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+`;
+const XButton = styled.button`
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  &:hover {
+    background-color: whitesmoke;
+    border-radius: 100%;
+  }
+`;
 function Items() {
+  const [openIndex, setOpenIndex] = useState();
   return (
     <>
       {imgItems.map((item, index) => (
@@ -168,6 +200,27 @@ function Items() {
               <span> {item.comment}</span>
             </ItemsWrapper>
           </PostWrite>
+          {openIndex === index && (
+            <ModalChat onClose={() => setOpenIndex()}>
+              <ModalHeader>
+                <XButton onClick={() => setOpenIndex()}>
+                  <IconsImg src={XIcon} />
+                </XButton>
+                <span>Draft</span>
+              </ModalHeader>
+              <ModalPostWrapper>
+                <PostWrite>
+                  <UserImg src={item.userImg}></UserImg>
+                  <ItemsWrapper>
+                    <span>{item.userName}</span>
+                    <p>{item.tag}</p>
+                    <span>{item.comment}</span>
+                  </ItemsWrapper>
+                </PostWrite>
+              </ModalPostWrapper>
+              <PostComponents type="reply" />
+            </ModalChat>
+          )}
 
           <ItemsImgWrapper>
             <ItemsImg src={item.images[0]} />
@@ -176,9 +229,10 @@ function Items() {
           </ItemsImgWrapper>
 
           <ItemsIconsWrapper>
-            <BlueItem>
+            <BlueItem as="button" onClick={() => setOpenIndex(index)}>
               <IconsImg src={chatIcon} /> <span>3</span>
             </BlueItem>
+
             <GreenItem>
               <IconsImg src={arrowRoundedIcon} /> <span>1.7k</span>
             </GreenItem>

@@ -7,7 +7,8 @@ import fireIcon from "../../../assets/icons/fire.svg";
 const PostWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid #ddd;
+  border-bottom: ${(props) => (props.isReply ? "none" : "1px solid #ddd")};
+  padding: ${(props) => (props.isReply ? "20px" : "none")};
 `;
 const PostWrite = styled.div`
   display: flex;
@@ -19,22 +20,24 @@ const UserImg = styled.img`
   height: 35px;
   border-radius: 20px;
 `;
-const WriteInput = styled.input.attrs({
-  placeholder: "What's happening?",
-})`
+const WriteInput = styled.input.attrs((props) => ({
+  placeholder: props.isReply ? "Post your reply" : "What's happening?",
+}))`
   padding: 12px;
   font-size: 20px;
   border: none;
   outline: none;
 `;
+
 const IconsWrite = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 const IconsWrapper = styled.div`
   display: flex;
   gap: 10px;
-  margin: 10px 60px;
+  margin: ${(props) => (props.isReply ? "0px 15px" : "10px 60px")};
   cursor: pointer;
 `;
 const IconsImg = styled.img`
@@ -57,23 +60,24 @@ const PostBtn = styled.button`
   }
 `;
 
-function PostComponents() {
+function PostComponents({ type = "post" }) {
+  const isReply = type === "reply";
   return (
     <>
-      <PostWrapper>
+      <PostWrapper isReply={isReply}>
         <PostWrite>
           <UserImg src="https://mblogthumb-phinf.pstatic.net/MjAyNTAxMjJfMTg4/MDAxNzM3NTQ1NzY1MDc0.Pgcv6JXSxrh1KHXVB2c2X5rJ8FHDrsvsQ5-35AWa0asg.urpL4d0Xau_DkMR-UDeFJT09h0whunwWcezTf9wawu0g.JPEG/image.JPEG?type=w800" />
-          <WriteInput />
+          <WriteInput isReply={isReply} />
         </PostWrite>
         <IconsWrite>
-          <IconsWrapper>
+          <IconsWrapper isReply={isReply}>
             <IconsImg src={photoIcon} />
             <IconsImg src={gifIcon} />
             <IconsImg src={fireIcon} />
             <IconsImg src={smileIcon} />
             <IconsImg src={locationIcon} />
           </IconsWrapper>
-          <PostBtn>post</PostBtn>
+          <PostBtn>{isReply ? "Reply" : "Post"}</PostBtn>
         </IconsWrite>
       </PostWrapper>
     </>
