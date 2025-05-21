@@ -1,19 +1,28 @@
 import styled from "styled-components";
-import { FaArrowLeft, FaCalendarAlt } from "react-icons/fa";
+import { FaArrowLeft, FaCalendarAlt, FaLock } from "react-icons/fa";
 import ProfileTabs from "./ProfileTabs";
 import PostCard from "./PostCard";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReplieCard from "./ReplieCard";
+import EditProfileModal from "./EditProfileModal";
 
 const ProfilePage = () => {
-  const [activeTab, setActiveTab] = useState(
-    "Posts",
-    "Replies",
-    "Highlights",
-    "Articles",
-    "Media",
-    "Likes"
-  );
+  const [activeTab, setActiveTab] = useState("Posts");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+  // 모달 열릴 때 스크롤 막기
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    // 컴포넌트 unmount 시 스크롤 원복
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isModalOpen]);
   return (
     <Container>
       <Header>
@@ -24,6 +33,10 @@ const ProfilePage = () => {
         </HeaderInfo>
       </Header>
       <Banner />
+      <EditProfile>
+        <EditButton onClick={openModal}>Edit profile</EditButton>
+      </EditProfile>
+      {isModalOpen && <EditProfileModal onClose={closeModal} />}
       <Avatar src="https://mblogthumb-phinf.pstatic.net/MjAyNTAxMjJfMTg4/MDAxNzM3NTQ1NzY1MDc0.Pgcv6JXSxrh1KHXVB2c2X5rJ8FHDrsvsQ5-35AWa0asg.urpL4d0Xau_DkMR-UDeFJT09h0whunwWcezTf9wawu0g.JPEG/image.JPEG?type=w800" />
       <ProfileContent>
         <NameTag>
@@ -215,6 +228,37 @@ const ProfilePage = () => {
           </Highlight>
         </>
       )}
+      {activeTab === "Articles" && (
+        <>
+          <Highlight>
+            <HighlightTitle>Write Articles on X</HighlightTitle>
+            <HighlightInfo>
+              You must be subscribed to Premium+ to write Articles on X
+            </HighlightInfo>
+            <SubscribeButton>Upgrade to Premium+</SubscribeButton>
+          </Highlight>
+        </>
+      )}
+      {activeTab === "Media" && (
+        <>
+          <MediaSection>
+            <Media>
+              <MediaImg src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Seoul-Gyeongbokgung-Sundial-02.jpg/330px-Seoul-Gyeongbokgung-Sundial-02.jpg" />
+            </Media>
+            <Media>
+              <MediaImg src="https://mblogthumb-phinf.pstatic.net/MjAyNTAxMjJfMTg4/MDAxNzM3NTQ1NzY1MDc0.Pgcv6JXSxrh1KHXVB2c2X5rJ8FHDrsvsQ5-35AWa0asg.urpL4d0Xau_DkMR-UDeFJT09h0whunwWcezTf9wawu0g.JPEG/image.JPEG?type=w800" />
+            </Media>
+          </MediaSection>
+        </>
+      )}
+      {activeTab === "Likes" && (
+        <>
+          <Likes>
+            <FaLock style={{ marginRight: "8px" }} />
+            Your likes are private. Only you can see them.
+          </Likes>
+        </>
+      )}
     </Container>
   );
 };
@@ -266,6 +310,27 @@ const Banner = styled.div`
   background-image: url("https://blog.kakaocdn.net/dn/bDCU0i/btsLA5oAVTo/b6ZvAOcU2eglvaGb1QXKkK/img.webp");
   background-size: cover;
   height: 200px;
+`;
+
+const EditProfile = styled.div`
+  max-width: 600px;
+  position: relative;
+`;
+
+const EditButton = styled.div`
+  font-size: 15px;
+  font-weight: bold;
+  position: absolute;
+  right: 0;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 10px 15px;
+  margin: 15px;
+  border-radius: 50px;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const Avatar = styled.img`
@@ -385,6 +450,7 @@ const FollowButton = styled.div`
   border-radius: 20px;
   font-weight: bold;
   border: none;
+  transition: background-color 0.2s ease;
   cursor: pointer;
   &:hover {
     background-color: #333;
@@ -440,11 +506,38 @@ const SubscribeButton = styled.div`
   padding: 10px 16px;
   font-size: 15px;
   border: none;
-  border-radius: 9999px;
+  border-radius: 100px;
   cursor: pointer;
   transition: background-color 0.2s ease;
 
   &:hover {
     background-color: #272c30;
   }
+`;
+
+const MediaSection = styled.div`
+  max-width: 600px;
+  display: flex;
+  align-items: left;
+`;
+
+const Media = styled.div`
+  max-width: 600px;
+  margin: 5px;
+  cursor: pointer;
+`;
+
+const MediaImg = styled.img`
+  width: 185px;
+  height: 185px;
+`;
+
+const Likes = styled.div`
+  max-width: 600px;
+  display: flex;
+  align-items: left;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #eafaff;
 `;
