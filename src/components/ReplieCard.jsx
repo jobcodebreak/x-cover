@@ -8,11 +8,12 @@ import {
   FaShare,
 } from "react-icons/fa";
 
-const PostCard = ({
+const ReplieCard = ({
   profileImage,
   displayName,
   username,
   date,
+  replyingTo,
   text,
   hashtag,
   postImage,
@@ -27,6 +28,10 @@ const PostCard = ({
             @{username} · {date}
           </Username>
         </Header>
+        <Header2>
+          <Label>Replying to</Label>
+          <ReplyingTo>{replyingTo}</ReplyingTo>
+        </Header2>
         <Text>{text}</Text>
         <Hashtag>{hashtag}</Hashtag>
         <PostImage src={postImage} />
@@ -59,7 +64,7 @@ const PostCard = ({
   );
 };
 
-export default PostCard;
+export default ReplieCard;
 
 // ======================= styled-components =========================
 const CardContainer = styled.div`
@@ -100,6 +105,24 @@ const DisplayName = styled.span`
 const Username = styled.span`
   color: #657786;
   font-weight: 500;
+`;
+
+const Header2 = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 4px 0;
+`;
+
+const Label = styled.div`
+  color: #657786;
+`;
+
+const ReplyingTo = styled.div`
+  color: #1da1f2;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Text = styled.div`
