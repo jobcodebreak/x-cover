@@ -10,8 +10,17 @@ X 커버 화면 클론하기 [Figma 목업](https://www.figma.com/design/zDYwKLS
 src/-
 ├── assets
 │
-├── pages
-│
+├── pages/
+│   ├── MainPage.tsx
+│   ├── SearchPage.tsx
+│   ├── ProfilePage.tsx
+│   └── components/
+│       ├── mainpage/
+│       │   └── (MainPage 전용 컴포넌트들)
+│       ├── searchpage/
+│       │   └── (SearchPage 전용 컴포넌트들)
+│       └── profilepage/
+│           └── (ProfilePage 전용 컴포넌트들)
 ├── components/
 │
 ├── hooks/
