@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import ellipsisIcon from "../assets/icons/ellipsis-circle.svg";
 import searchIcon from "../assets/icons/fillMagnifying-glass.svg";
+import userRecommendations from "./data/userRecommendations";
+import trendData from "./data/trendData";
 
 export default function RightSidebar() {
   return (
@@ -16,40 +18,16 @@ export default function RightSidebar() {
       <Section>
         <SectionTitle>You might like</SectionTitle>
         <UserRecommendList>
-          <UserRecommendItem>
-            <Avatar
-              src="https://i0.wp.com/yoonsb.com/wp-content/uploads/2016/11/2016-11-03-135719.png?fit=751%2C475&ssl=1"
-              alt="User1"
-            />
-            <div>
-              <UserName>이순신</UserName>
-              <UserHandle>@lee_soonshin</UserHandle>
-            </div>
-            <FollowButton>Follow</FollowButton>
-          </UserRecommendItem>
-
-          <UserRecommendItem>
-            <Avatar
-              src="https://i.namu.wiki/i/cmDI70T4ElYmbvqhMauKsmFl5FdhE-5Cg0xl15leKlILTfrb4qhjGRLopJ3aXKpRAKUTGH-uluOhUpUEagSmPPLR-Cf0GnucY3Kieo3hEmZpftmuWdvCudt23GVuzx5qt0LaBW1Fkl-VDGAVeJlw3Q.webp"
-              alt="User2"
-            />
-            <div>
-              <UserName>신사임당</UserName>
-              <UserHandle>@shin_saimdang</UserHandle>
-            </div>
-            <FollowButton>Follow</FollowButton>
-          </UserRecommendItem>
-          <UserRecommendItem>
-            <Avatar
-              src="https://i.namu.wiki/i/vpUa0g7EoXzqchiUVKsRW74FQDQ9e2LgMoJMduYKddgaf29SGt1vOBn1ise7MKXyJR9tf-_FADCpi2SrqwNPT1pJCP0M6-hTYY6z8csebJ6LX1iS8zUW6WD18KK81ohBwqVoOJPG75wThC9F-ar4UA.webp"
-              alt="User3"
-            />
-            <div>
-              <UserName>이황</UserName>
-              <UserHandle>@yi_hwang</UserHandle>
-            </div>
-            <FollowButton>Follow</FollowButton>
-          </UserRecommendItem>
+          {userRecommendations.map((user) => (
+            <UserRecommendItem key={user.id}>
+              <Avatar src={user.avatar} alt={user.alt} />
+              <div>
+                <UserName>{user.name}</UserName>
+                <UserHandle>{user.handle}</UserHandle>
+              </div>
+              <FollowButton>Follow</FollowButton>
+            </UserRecommendItem>
+          ))}
         </UserRecommendList>
         <ShowMore>Show more</ShowMore>
       </Section>
@@ -57,54 +35,20 @@ export default function RightSidebar() {
       <Section>
         <SectionTitle>What’s happening</SectionTitle>
         <TrendList>
-          <TrendItem>
-            <ItemBox>
-              <ItemInfoWrapper>
-                <ItemTag>
-                  <TrendingIn>Trending in Joseon</TrendingIn>
-                  <Itemname>무인정사</Itemname>
-                  <TrendTweets>20.7K posts</TrendTweets>
-                </ItemTag>
-              </ItemInfoWrapper>
-              <EllipsisIcon src={ellipsisIcon} />
-            </ItemBox>
-          </TrendItem>
-          <TrendItem>
-            <ItemBox>
-              <ItemInfoWrapper>
-                <ItemTag>
-                  <TrendingIn>Trending in Joseon</TrendingIn>
-                  <Itemname>박포의 난</Itemname>
-                  <TrendTweets>18.1K posts</TrendTweets>
-                </ItemTag>
-              </ItemInfoWrapper>
-              <EllipsisIcon src={ellipsisIcon} />
-            </ItemBox>
-          </TrendItem>
-          <TrendItem>
-            <ItemBox>
-              <ItemInfoWrapper>
-                <ItemTag>
-                  <TrendingIn>Trending in Joseon</TrendingIn>
-                  <Itemname>한양 대화재</Itemname>
-                  <TrendTweets>43.8K posts</TrendTweets>
-                </ItemTag>
-              </ItemInfoWrapper>
-              <EllipsisIcon src={ellipsisIcon} />
-            </ItemBox>
-          </TrendItem>
-          <TrendItem>
-            <ItemBox>
-              <ItemInfoWrapper>
-                <ItemTag>
-                  <TrendingIn>Trending in Joseon</TrendingIn>
-                  <Itemname>노비종모법</Itemname>
-                  <TrendTweets>2,096 posts</TrendTweets>
-                </ItemTag>
-              </ItemInfoWrapper>
-              <EllipsisIcon src={ellipsisIcon} />
-            </ItemBox>
-          </TrendItem>
+          {trendData.map(({ id, trendingIn, itemName, trendTweets }) => (
+            <TrendItem key={id}>
+              <ItemBox>
+                <ItemInfoWrapper>
+                  <ItemTag>
+                    <TrendingIn>{trendingIn}</TrendingIn>
+                    <Itemname>{itemName}</Itemname>
+                    <TrendTweets>{trendTweets}</TrendTweets>
+                  </ItemTag>
+                </ItemInfoWrapper>
+                <EllipsisIcon src={ellipsisIcon} />
+              </ItemBox>
+            </TrendItem>
+          ))}
         </TrendList>
         <ShowMore>Show more</ShowMore>
       </Section>

@@ -7,6 +7,10 @@ import ReplieCard from "./ReplieCard";
 import EditProfileModal from "./EditProfileModal";
 import { useNavigate } from "react-router-dom";
 import Carousel from "./Carousel";
+import UserProfile from "./data/UserProfile";
+import posts from "./data/posts";
+import userRecommendations from "./data/userRecommendations";
+import replies from "./data/replies";
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("Posts");
@@ -53,8 +57,8 @@ const ProfilePage = () => {
       <Header>
         <BackIcon onClick={handleBackClick} />
         <HeaderInfo>
-          <Name>세종대왕</Name>
-          <Tweets>2 posts</Tweets>
+          <Name>{UserProfile.name}</Name>
+          <Tweets>{UserProfile.postsCount} posts</Tweets>
         </HeaderInfo>
       </Header>
       <Banner />
@@ -62,96 +66,55 @@ const ProfilePage = () => {
         <EditButton onClick={openModal}>Edit profile</EditButton>
       </EditProfile>
       {isModalOpen && <EditProfileModal onClose={closeModal} />}
-      <Avatar src="https://mblogthumb-phinf.pstatic.net/MjAyNTAxMjJfMTg4/MDAxNzM3NTQ1NzY1MDc0.Pgcv6JXSxrh1KHXVB2c2X5rJ8FHDrsvsQ5-35AWa0asg.urpL4d0Xau_DkMR-UDeFJT09h0whunwWcezTf9wawu0g.JPEG/image.JPEG?type=w800" />
+      <Avatar src={UserProfile.avatar} />
       <ProfileContent>
         <NameTag>
-          <DisplayName>세종대왕</DisplayName>
-          <Username>@KingSejong_theGreat</Username>
+          <DisplayName>{UserProfile.name}</DisplayName>
+          <Username>{UserProfile.username}</Username>
         </NameTag>
-        <Bio>king of Joseon, The creator of Hangul</Bio>
+        <Bio>{UserProfile.bio}</Bio>
         <Joined>
           <FaCalendarAlt size={14} style={{ marginRight: "4px" }} />
-          Joined June 1418
+          Joined {UserProfile.joinedDate}
         </Joined>
         <FollowStats>
           <span>
-            <strong>1</strong> Following
+            <strong>{UserProfile.followingCount}</strong> Following
           </span>
           <span>
-            <strong>1</strong> Followers
+            <strong>{UserProfile.followersCount}</strong> Followers
           </span>
         </FollowStats>
       </ProfileContent>
       <ProfileTabs activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === "Posts" && (
         <>
-          <PostCard
-            profileImage="https://mblogthumb-phinf.pstatic.net/MjAyNTAxMjJfMTg4/MDAxNzM3NTQ1NzY1MDc0.Pgcv6JXSxrh1KHXVB2c2X5rJ8FHDrsvsQ5-35AWa0asg.urpL4d0Xau_DkMR-UDeFJT09h0whunwWcezTf9wawu0g.JPEG/image.JPEG?type=w800"
-            displayName="세종대왕"
-            username="KingSejong_theGreat"
-            date="Oct 10,1434"
-            text="영실이가 만들어준 앙부일구"
-            hashtag="#앙부일구 #장영실"
-            postImage="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Seoul-Gyeongbokgung-Sundial-02.jpg/330px-Seoul-Gyeongbokgung-Sundial-02.jpg"
-          />
-          <PostCard
-            profileImage="https://mblogthumb-phinf.pstatic.net/MjAyNTAxMjJfMTg4/MDAxNzM3NTQ1NzY1MDc0.Pgcv6JXSxrh1KHXVB2c2X5rJ8FHDrsvsQ5-35AWa0asg.urpL4d0Xau_DkMR-UDeFJT09h0whunwWcezTf9wawu0g.JPEG/image.JPEG?type=w800"
-            displayName="세종대왕"
-            username="KingSejong_theGreat"
-            date="Sep 9,1418"
-            text="즉위식을 위한 증명사진"
-            hashtag="#증명사진"
-            postImage="https://mblogthumb-phinf.pstatic.net/MjAyNTAxMjJfMTg4/MDAxNzM3NTQ1NzY1MDc0.Pgcv6JXSxrh1KHXVB2c2X5rJ8FHDrsvsQ5-35AWa0asg.urpL4d0Xau_DkMR-UDeFJT09h0whunwWcezTf9wawu0g.JPEG/image.JPEG?type=w800"
-          />
-
+          {posts.map((post, index) => (
+            <PostCard
+              key={index}
+              profileImage={post.profileImage}
+              displayName={post.displayName}
+              username={post.username}
+              date={post.date}
+              text={post.text}
+              hashtag={post.hashtag}
+              postImage={post.postImage}
+            />
+          ))}
           <Section>
             <SectionTitle>Who to follow</SectionTitle>
             <UserRecommendList>
-              <UserRecommendItem>
-                <SectionAvatar
-                  src="https://i0.wp.com/yoonsb.com/wp-content/uploads/2016/11/2016-11-03-135719.png?fit=751%2C475&ssl=1"
-                  alt="User1"
-                />
-                <div>
-                  <UserName>이순신</UserName>
-                  <UserHandle>@lee_soonshin</UserHandle>
-                  <UserComment>
-                    아직 신에게는 12척의 배가 남아 있사옵니다.
-                  </UserComment>
-                </div>
-                <FollowButton>Follow</FollowButton>
-              </UserRecommendItem>
-
-              <UserRecommendItem>
-                <SectionAvatar
-                  src="https://i.namu.wiki/i/cmDI70T4ElYmbvqhMauKsmFl5FdhE-5Cg0xl15leKlILTfrb4qhjGRLopJ3aXKpRAKUTGH-uluOhUpUEagSmPPLR-Cf0GnucY3Kieo3hEmZpftmuWdvCudt23GVuzx5qt0LaBW1Fkl-VDGAVeJlw3Q.webp"
-                  alt="User2"
-                />
-                <div>
-                  <UserName>신사임당</UserName>
-                  <UserHandle>@shin_saimdang</UserHandle>
-                  <UserComment>
-                    기품을 지키되 사치하지 말 것이고, 지성을 갖추되 자랑하지
-                    말라.
-                  </UserComment>
-                </div>
-                <FollowButton>Follow</FollowButton>
-              </UserRecommendItem>
-              <UserRecommendItem>
-                <SectionAvatar
-                  src="https://i.namu.wiki/i/vpUa0g7EoXzqchiUVKsRW74FQDQ9e2LgMoJMduYKddgaf29SGt1vOBn1ise7MKXyJR9tf-_FADCpi2SrqwNPT1pJCP0M6-hTYY6z8csebJ6LX1iS8zUW6WD18KK81ohBwqVoOJPG75wThC9F-ar4UA.webp"
-                  alt="User3"
-                />
-                <div>
-                  <UserName>이황</UserName>
-                  <UserHandle>@yi_hwang</UserHandle>
-                  <UserComment>
-                    천하의 의리가 끝이 없는데, 어찌 자기만 옳고 남은 그르다고 할
-                    수 있겠는가?
-                  </UserComment>
-                </div>
-                <FollowButton>Follow</FollowButton>
-              </UserRecommendItem>
+              {userRecommendations.map((user, index) => (
+                <UserRecommendItem key={index}>
+                  <SectionAvatar src={user.avatar} alt={`User${index + 1}`} />
+                  <div>
+                    <UserName>{user.name}</UserName>
+                    <UserHandle>{user.handle}</UserHandle>
+                    <UserComment>{user.comment}</UserComment>
+                  </div>
+                  <FollowButton>Follow</FollowButton>
+                </UserRecommendItem>
+              ))}
             </UserRecommendList>
             <ShowMore>Show more</ShowMore>
           </Section>
@@ -159,83 +122,45 @@ const ProfilePage = () => {
       )}
       {activeTab === "Replies" && (
         <>
-          <ReplieCard
-            profileImage="https://mblogthumb-phinf.pstatic.net/MjAyNTAxMjJfMTg4/MDAxNzM3NTQ1NzY1MDc0.Pgcv6JXSxrh1KHXVB2c2X5rJ8FHDrsvsQ5-35AWa0asg.urpL4d0Xau_DkMR-UDeFJT09h0whunwWcezTf9wawu0g.JPEG/image.JPEG?type=w800"
-            displayName="세종대왕"
-            username="KingSejong_theGreat"
-            date="Oct 10,1434"
-            replyingTo="@jang_youngsil"
-            text="어서와"
-            hashtag=""
-            postImage=""
-          />
-          <PostCard
-            profileImage="https://mblogthumb-phinf.pstatic.net/MjAyNTAxMjJfMTg4/MDAxNzM3NTQ1NzY1MDc0.Pgcv6JXSxrh1KHXVB2c2X5rJ8FHDrsvsQ5-35AWa0asg.urpL4d0Xau_DkMR-UDeFJT09h0whunwWcezTf9wawu0g.JPEG/image.JPEG?type=w800"
-            displayName="세종대왕"
-            username="KingSejong_theGreat"
-            date="Oct 10,1434"
-            text="영실이가 만들어준 앙부일구"
-            hashtag="#앙부일구 #장영실"
-            postImage="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Seoul-Gyeongbokgung-Sundial-02.jpg/330px-Seoul-Gyeongbokgung-Sundial-02.jpg"
-          />
-          <PostCard
-            profileImage="https://mblogthumb-phinf.pstatic.net/MjAyNTAxMjJfMTg4/MDAxNzM3NTQ1NzY1MDc0.Pgcv6JXSxrh1KHXVB2c2X5rJ8FHDrsvsQ5-35AWa0asg.urpL4d0Xau_DkMR-UDeFJT09h0whunwWcezTf9wawu0g.JPEG/image.JPEG?type=w800"
-            displayName="세종대왕"
-            username="KingSejong_theGreat"
-            date="Sep 9,1418"
-            text="즉위식을 위한 증명사진"
-            hashtag="#증명사진"
-            postImage="https://mblogthumb-phinf.pstatic.net/MjAyNTAxMjJfMTg4/MDAxNzM3NTQ1NzY1MDc0.Pgcv6JXSxrh1KHXVB2c2X5rJ8FHDrsvsQ5-35AWa0asg.urpL4d0Xau_DkMR-UDeFJT09h0whunwWcezTf9wawu0g.JPEG/image.JPEG?type=w800"
-          />
-
+          {replies.map((reply) => (
+            <ReplieCard
+              key={reply.id}
+              profileImage={reply.profileImage}
+              displayName={reply.displayName}
+              username={reply.username}
+              date={reply.date}
+              replyingTo={reply.replyingTo}
+              text={reply.text}
+              hashtag={reply.hashtag}
+              postImage={reply.postImage}
+            />
+          ))}
+          {posts.map((post, index) => (
+            <PostCard
+              key={index}
+              profileImage={post.profileImage}
+              displayName={post.displayName}
+              username={post.username}
+              date={post.date}
+              text={post.text}
+              hashtag={post.hashtag}
+              postImage={post.postImage}
+            />
+          ))}
           <Section>
             <SectionTitle>Who to follow</SectionTitle>
             <UserRecommendList>
-              <UserRecommendItem>
-                <SectionAvatar
-                  src="https://i0.wp.com/yoonsb.com/wp-content/uploads/2016/11/2016-11-03-135719.png?fit=751%2C475&ssl=1"
-                  alt="User1"
-                />
-                <div>
-                  <UserName>이순신</UserName>
-                  <UserHandle>@lee_soonshin</UserHandle>
-                  <UserComment>
-                    아직 신에게는 12척의 배가 남아 있사옵니다.
-                  </UserComment>
-                </div>
-                <FollowButton>Follow</FollowButton>
-              </UserRecommendItem>
-
-              <UserRecommendItem>
-                <SectionAvatar
-                  src="https://i.namu.wiki/i/cmDI70T4ElYmbvqhMauKsmFl5FdhE-5Cg0xl15leKlILTfrb4qhjGRLopJ3aXKpRAKUTGH-uluOhUpUEagSmPPLR-Cf0GnucY3Kieo3hEmZpftmuWdvCudt23GVuzx5qt0LaBW1Fkl-VDGAVeJlw3Q.webp"
-                  alt="User2"
-                />
-                <div>
-                  <UserName>신사임당</UserName>
-                  <UserHandle>@shin_saimdang</UserHandle>
-                  <UserComment>
-                    기품을 지키되 사치하지 말 것이고, 지성을 갖추되 자랑하지
-                    말라.
-                  </UserComment>
-                </div>
-                <FollowButton>Follow</FollowButton>
-              </UserRecommendItem>
-              <UserRecommendItem>
-                <SectionAvatar
-                  src="https://i.namu.wiki/i/vpUa0g7EoXzqchiUVKsRW74FQDQ9e2LgMoJMduYKddgaf29SGt1vOBn1ise7MKXyJR9tf-_FADCpi2SrqwNPT1pJCP0M6-hTYY6z8csebJ6LX1iS8zUW6WD18KK81ohBwqVoOJPG75wThC9F-ar4UA.webp"
-                  alt="User3"
-                />
-                <div>
-                  <UserName>이황</UserName>
-                  <UserHandle>@yi_hwang</UserHandle>
-                  <UserComment>
-                    천하의 의리가 끝이 없는데, 어찌 자기만 옳고 남은 그르다고 할
-                    수 있겠는가?
-                  </UserComment>
-                </div>
-                <FollowButton>Follow</FollowButton>
-              </UserRecommendItem>
+              {userRecommendations.map((user, index) => (
+                <UserRecommendItem key={index}>
+                  <SectionAvatar src={user.avatar} alt={`User${index + 1}`} />
+                  <div>
+                    <UserName>{user.name}</UserName>
+                    <UserHandle>{user.handle}</UserHandle>
+                    <UserComment>{user.comment}</UserComment>
+                  </div>
+                  <FollowButton>Follow</FollowButton>
+                </UserRecommendItem>
+              ))}
             </UserRecommendList>
             <ShowMore>Show more</ShowMore>
           </Section>
