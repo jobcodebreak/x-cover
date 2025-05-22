@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { FaArrowLeft, FaCalendarAlt, FaLock } from "react-icons/fa";
-import ProfileTabs from "./ProfileTabs";
-import PostCard from "./PostCard";
+import ProfileTabs from "../../../components/ProfileTabs";
+import PostCard from "../../../components/PostCard";
 import React, { useState, useEffect } from "react";
-import ReplieCard from "./ReplieCard";
-import EditProfileModal from "./EditProfileModal";
+import ReplieCard from "../../../components/ReplieCard";
+import EditProfileModal from "../../../components/EditProfileModal";
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("Posts");
@@ -23,6 +24,25 @@ const ProfilePage = () => {
       document.body.style.overflow = "auto";
     };
   }, [isModalOpen]);
+  //홈 화면으로 이동시켜주는 함수
+  function Header() {
+    const navigate = useNavigate();
+
+    const handleBackClick = () => {
+      navigate("/");
+    };
+
+    return (
+      <Header>
+        <BackIcon onClick={handleBackClick} />
+        <HeaderInfo>
+          <Name>세종대왕</Name>
+          <Tweets>2 posts</Tweets>
+        </HeaderInfo>
+      </Header>
+    );
+  }
+
   return (
     <Container>
       <Header>
