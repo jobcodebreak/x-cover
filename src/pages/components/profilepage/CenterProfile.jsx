@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { FaArrowLeft, FaCalendarAlt, FaLock } from "react-icons/fa";
-import ProfileTabs from "../../../components/ProfileTabs";
-import PostCard from "../../../components/PostCard";
+import ProfileTabs from "../profilepage/ProfileTabs";
+import PostCard from "../profilepage/PostCard";
 import React, { useState, useEffect } from "react";
-import ReplieCard from "../../../components/ReplieCard";
-import EditProfileModal from "../../../components/EditProfileModal";
+import ReplieCard from "../profilepage/ReplieCard";
+import EditProfileModal from "../profilepage/EditProfileModal";
 import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {

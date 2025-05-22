@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import RightSidebar from "../components/RightSidebar";
-import CenterProfile from "../components/CenterProfile";
+import CenterProfile from "../pages/components/profilepage/CenterProfile";
 
 const Container = styled.div`
   display: flex;
