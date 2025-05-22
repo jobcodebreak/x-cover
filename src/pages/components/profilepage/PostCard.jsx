@@ -48,7 +48,20 @@ const PostCard = ({
             <CommentButton onClick={openModal}>
               <FaRegComment />
             </CommentButton>
-            {isModalOpen && <CommentModal onClose={closeModal} />}
+            {isModalOpen && (
+              <CommentModal
+                onClose={closeModal}
+                post={{
+                  profileImage,
+                  displayName,
+                  username,
+                  date,
+                  text,
+                  hashtag,
+                  postImage,
+                }}
+              />
+            )}
             <RetweetButton>
               <FaRetweet />
             </RetweetButton>
@@ -96,6 +109,10 @@ const ProfileImage = styled.img`
   height: 48px;
   border-radius: 50%;
   margin-right: 12px;
+  transition: filter 0.2s ease;
+  &:hover {
+    filter: brightness(0.9);
+  }
 `;
 
 const Content = styled.div`
@@ -112,6 +129,9 @@ const Header = styled.div`
 const DisplayName = styled.span`
   font-size: 16px;
   font-weight: bold;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Username = styled.span`

@@ -117,6 +117,10 @@ const Avatar = styled.img`
   height: 36px;
   border-radius: 50%;
   margin-right: 10px;
+  transition: filter 0.2s ease;
+  &:hover {
+    filter: brightness(0.9);
+  }
 `;
 
 const UserName = styled.div`
