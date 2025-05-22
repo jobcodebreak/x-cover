@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TabBox, TabitemWrap, ContentBox } from './styles';
 import Tab from './Tab';
 import TabForyou from './TabForyou';
+import TabTrending from './TabTrending';
 
 
 const TabMenu = () => {
@@ -17,7 +18,7 @@ const TabMenu = () => {
 
   const tabContents = {
     1: <TabForyou />,
-    2: <p>실시간 인기 콘텐츠입니다.</p>,
+    2: <TabTrending />,
     3: <p>최신 뉴스입니다.</p>,
     4: <p>스포츠 관련 소식입니다.</p>,
     5: <p>연예계 뉴스를 볼 수 있습니다.</p>,

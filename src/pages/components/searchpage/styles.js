@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-
+//tabmenu
 const TabBox = styled.div`
   // outline: 1px solid red;
   border-bottom: 1px solid #eee ;
   position:sticky;
-  top:52px;
+  top:55px;
   z-index: 99999;
 `;
 const TabitemWrap = styled.ul`
@@ -58,7 +58,7 @@ const TabTit = styled.span`
   color: gray;
 `;
 
-// TabContent css
+// TabContent_Tabforyou
 const Cont = styled.div`
   width:600px;
 `;
@@ -92,15 +92,23 @@ const ImgTxt = styled.div`
   }
 `;
 const ImgBtn = styled(Link)`
-  width:30px;
-  height:30px;
+  width:40px;
+  height:40px;
   display:block;
   position:absolute;
-  top:0;
-  right:0;
+  padding:5px;
+  border-radius:50%;
+  top:10px;
+  right:10px;
+  z-index:999999;
+  &:hover{
+    background-color: rgba(0,0,0,0.1);
+  }
   img {
     width:100%;
-    // filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+    z-index:999999;
+    background:none;
   }
 `
 
@@ -109,7 +117,7 @@ const Test = styled.div`
 `;
 
 
-// 트렌드 아이템 
+// trenditem
 const Trenditem = styled.li`
   display:flex;
   justify-content: space-between;
@@ -154,7 +162,7 @@ const MoreBtn = styled(Link)`
   }
 `;
 
-// 팔로우 추천
+// who to follows
 const ConListWrap = styled.div`
   padding: 20px;
   border-bottom:1px solid #ddd;
@@ -245,7 +253,7 @@ export {
   TabitemWrap,
   Tabitem,
   ContentBox,
-  TabTit, // ✅ 이거 포함되었는지 꼭 확인
+  TabTit,
   Cont,
   ImgBox,
   ImgTxt,
