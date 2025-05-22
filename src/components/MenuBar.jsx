@@ -14,7 +14,7 @@ import profileIcon from "../assets/icons/user.svg";
 import fillProfileIcon from "../assets/icons/fillProfile.svg";
 import fillHomeIcon from "../assets/icons/fillHome.svg";
 import fillMagnifying from "../assets/icons/fillMagnifying-glass.svg";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   min-width: 250px;
@@ -65,9 +65,19 @@ const PostBtn = styled.button`
 `;
 
 const Logo = styled.button`
-  border: none;
-  background-color: white;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background-color: white;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(1, 1, 1, 0.1);
+  }
 `;
 const UserBox = styled.div`
   display: flex;
@@ -77,7 +87,7 @@ const UserBox = styled.div`
   margin-top: auto;
   padding: 6px 14px;
   border-radius: 30px;
-    transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease;
   cursor: pointer;
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
@@ -130,10 +140,15 @@ const menuItems = [
 function MenuBar() {
   const location = useLocation();
   const currentPath = location.pathname;
+  //useNavigate사용 백 아이콘 클릭 시 홈으로
+  const navigate = useNavigate();
+  const handleBackClick = () => {
+    navigate("/");
+  };
   return (
     <Container>
       <Logo>
-        <Img src={logoIcon}/>
+        <Img onClick={handleBackClick} src={logoIcon} />
       </Logo>
       {menuItems.map((item) => (
         <Link to={item.path} key={item.label}>

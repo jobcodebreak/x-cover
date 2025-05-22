@@ -305,6 +305,11 @@ const Avatar = styled.img`
   position: relative;
   top: -70px;
   left: 16px;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+  &:hover {
+    filter: brightness(0.9);
+  }
 `;
 
 const ProfileContent = styled.div`
@@ -426,6 +431,10 @@ const SectionAvatar = styled.img`
   height: 40px;
   border-radius: 50%;
   margin-right: 10px;
+  transition: filter 0.2s ease;
+  &:hover {
+    filter: brightness(0.9);
+  }
 `;
 
 const UserComment = styled.div`
