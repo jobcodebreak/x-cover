@@ -4,7 +4,7 @@ X 커버 화면 클론하기 [Figma 목업](https://www.figma.com/design/zDYwKLS
 
 ![화면](https://github.com/jobcodebreak/x-cover/blob/layout/preview.png?raw=true)
 
-### 디렉토리 구조
+### 🗂️ 디렉토리 구조
 
 ```text
 src/-
@@ -19,7 +19,7 @@ src/-
 └── store/
 ```
 
-### Git 브렌치 구조
+### 🪾 Git 브렌치 구조
 
 ```text
 * main
@@ -43,7 +43,7 @@ src/-
 - 5.21 ~ 5.22 : feature 추가, (햄버거메뉴, 좋아요 반응, 사진 슬라이스, 사진 확대, 팔로우 반응, 등 그래픽 요소) : 최대한 컴포넌트 쪼개기(재사용 성 증가)
 - 5.23 ~ 5.24 : refactoring, 비슷한 컴포넌트 병합 및 중복 줄이기, 공통 로직 hook으로 구현, 리덕스로 공용상태 구현
 
-### 구현한 기능들 (여기에 추가하기)
+### ⚙️ 구현한 기능들 (여기에 추가하기)
 
 #### pages
 
@@ -52,7 +52,7 @@ src/-
 - 내정보(my_profile) 레이아웃
 - 타유저(user_profile) 레이아웃
 
-### 요구사항
+### ✅ 요구사항
 
 1. (필수⭐) **React, JavaScript** 스택을 사용합니다.
 2. (선택) TypeScript, Next.js 스택을 사용합니다.
@@ -61,9 +61,14 @@ src/-
 5. (선택) 스타일링은 styled-components 또는 tailwindcss 사용을 권장합니다.
 6. 프론트엔드 직군끼리 진행하는 프로젝트이므로 mock 데이터나 공공으로 쓸 수 있는 오픈 API 등을 사용합니다.
 
-### 사용 라이브러리
+### 🔧 사용 라이브러리
 
 - react(19.1.0) : React
 - react-router-dom(7.6.0) : React Router
+- styled-components(6.1.18) : css-in-js
 - createGlobalStyle (styled-components(6.1.18)) : CSS reset
 - react-icons(5.5.0) : Icons
+
+## 📦 배포
+
+- netlify(https://x-cover.netlify.app/)
