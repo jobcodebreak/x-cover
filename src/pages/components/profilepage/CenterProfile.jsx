@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { FaArrowLeft, FaCalendarAlt, FaLock } from "react-icons/fa";
-import ProfileTabs from "../profilepage/ProfileTabs";
-import PostCard from "../profilepage/PostCard";
+import ProfileTabs from "./ProfileTabs";
+import PostCard from "./PostCard";
 import React, { useState, useEffect } from "react";
-import ReplieCard from "../profilepage/ReplieCard";
-import EditProfileModal from "../profilepage/EditProfileModal";
+import ReplieCard from "./ReplieCard";
+import EditProfileModal from "./EditProfileModal";
 import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
@@ -12,6 +12,11 @@ const ProfilePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  //useNavigate사용 백 아이콘 클릭 시 홈으로
+  const navigate = useNavigate();
+  const handleBackClick = () => {
+    navigate("/");
+  };
   // 모달 열릴 때 스크롤 막기
   useEffect(() => {
     if (isModalOpen) {
@@ -25,28 +30,11 @@ const ProfilePage = () => {
     };
   }, [isModalOpen]);
   //홈 화면으로 이동시켜주는 함수
-  function Header() {
-    const navigate = useNavigate();
-
-    const handleBackClick = () => {
-      navigate("/");
-    };
-
-    return (
-      <Header>
-        <BackIcon onClick={handleBackClick} />
-        <HeaderInfo>
-          <Name>세종대왕</Name>
-          <Tweets>2 posts</Tweets>
-        </HeaderInfo>
-      </Header>
-    );
-  }
 
   return (
     <Container>
       <Header>
-        <BackIcon />
+        <BackIcon onClick={handleBackClick} />
         <HeaderInfo>
           <Name>세종대왕</Name>
           <Tweets>2 posts</Tweets>
