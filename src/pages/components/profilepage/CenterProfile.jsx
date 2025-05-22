@@ -6,12 +6,30 @@ import React, { useState, useEffect } from "react";
 import ReplieCard from "./ReplieCard";
 import EditProfileModal from "./EditProfileModal";
 import { useNavigate } from "react-router-dom";
+import Carousel from "./Carousel";
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("Posts");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  const mediaImages = [
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Seoul-Gyeongbokgung-Sundial-02.jpg/330px-Seoul-Gyeongbokgung-Sundial-02.jpg",
+    "https://mblogthumb-phinf.pstatic.net/MjAyNTAxMjJfMTg4/MDAxNzM3NTQ1NzY1MDc0.Pgcv6JXSxrh1KHXVB2c2X5rJ8FHDrsvsQ5-35AWa0asg.urpL4d0Xau_DkMR-UDeFJT09h0whunwWcezTf9wawu0g.JPEG/image.JPEG?type=w800",
+  ];
+  const [isCarouselOpen, setIsCarouselOpen] = useState(false);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+
+  const openCarousel = (index) => {
+    setCarouselIndex(index);
+    setIsCarouselOpen(true);
+  };
+
+  const closeCarousel = () => {
+    setIsCarouselOpen(false);
+  };
+
   //useNavigate사용 백 아이콘 클릭 시 홈으로
   const navigate = useNavigate();
   const handleBackClick = () => {
@@ -29,7 +47,6 @@ const ProfilePage = () => {
       document.body.style.overflow = "auto";
     };
   }, [isModalOpen]);
-  //홈 화면으로 이동시켜주는 함수
 
   return (
     <Container>
@@ -250,13 +267,19 @@ const ProfilePage = () => {
       {activeTab === "Media" && (
         <>
           <MediaSection>
-            <Media>
-              <MediaImg src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Seoul-Gyeongbokgung-Sundial-02.jpg/330px-Seoul-Gyeongbokgung-Sundial-02.jpg" />
-            </Media>
-            <Media>
-              <MediaImg src="https://mblogthumb-phinf.pstatic.net/MjAyNTAxMjJfMTg4/MDAxNzM3NTQ1NzY1MDc0.Pgcv6JXSxrh1KHXVB2c2X5rJ8FHDrsvsQ5-35AWa0asg.urpL4d0Xau_DkMR-UDeFJT09h0whunwWcezTf9wawu0g.JPEG/image.JPEG?type=w800" />
-            </Media>
+            {mediaImages.map((img, idx) => (
+              <Media key={idx} onClick={() => openCarousel(idx)}>
+                <MediaImg src={img} />
+              </Media>
+            ))}
           </MediaSection>
+          {isCarouselOpen && (
+            <Carousel
+              images={mediaImages}
+              currentIndex={carouselIndex}
+              onClose={closeCarousel}
+            />
+          )}
         </>
       )}
       {activeTab === "Likes" && (
