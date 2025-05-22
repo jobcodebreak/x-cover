@@ -4,9 +4,7 @@ import styled from "styled-components";
 
 const tabs = ["Posts", "Replies", "Highlights", "Articles", "Media", "Likes"];
 
-const ProfileTabs = () => {
-  const [activeTab, setActiveTab] = useState("Posts");
-
+const ProfileTabs = ({ activeTab, setActiveTab }) => {
   return (
     <TabsContainer>
       {tabs.map((tab) => (
@@ -24,6 +22,8 @@ const ProfileTabs = () => {
 
 export default ProfileTabs;
 
+// ======================= styled-components =========================
+
 const TabsContainer = styled.div`
   display: flex;
   justify-content: space-around;
@@ -32,11 +32,16 @@ const TabsContainer = styled.div`
 `;
 
 const TabItem = styled.div`
-  padding: 12px 0;
+  padding: 15px 20px;
   font-weight: ${(props) => (props.active ? "bold" : "normal")};
   color: ${(props) => (props.active ? "black" : "#657786")};
   cursor: pointer;
   position: relative;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 
   &::after {
     content: "";

@@ -1,10 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import ellipsisIcon from "../assets/icons/ellipsis-circle.svg";
+import searchIcon from "../assets/icons/fillMagnifying-glass.svg";
 
 export default function RightSidebar() {
   return (
     <SidebarContainer>
+      <SearchBarWrapper>
+        <SearchInputWrapper>
+          <SearchIconImg src={searchIcon} alt="Search" />
+          <SearchInput type="text" placeholder="Search" />
+        </SearchInputWrapper>
+      </SearchBarWrapper>
+
       <Section>
         <SectionTitle>You might like</SectionTitle>
         <UserRecommendList>
@@ -33,12 +41,12 @@ export default function RightSidebar() {
           </UserRecommendItem>
           <UserRecommendItem>
             <Avatar
-              src="https://t2.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/4WWC/image/WnkV1nCsS-LYxi_uqkTxYDagdig.jpg"
+              src="https://i.namu.wiki/i/vpUa0g7EoXzqchiUVKsRW74FQDQ9e2LgMoJMduYKddgaf29SGt1vOBn1ise7MKXyJR9tf-_FADCpi2SrqwNPT1pJCP0M6-hTYY6z8csebJ6LX1iS8zUW6WD18KK81ohBwqVoOJPG75wThC9F-ar4UA.webp"
               alt="User3"
             />
             <div>
-              <UserName>장영실</UserName>
-              <UserHandle>@jang_youngsil</UserHandle>
+              <UserName>이황</UserName>
+              <UserHandle>@yi_hwang</UserHandle>
             </div>
             <FollowButton>Follow</FollowButton>
           </UserRecommendItem>
@@ -135,6 +143,7 @@ const TrendList = styled.ul`
 const TrendItem = styled.li`
   padding: 6px 14px;
   border-radius: 10px;
+  transition: background-color 0.2s ease;
   cursor: pointer;
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
@@ -152,6 +161,7 @@ const UserRecommendItem = styled.li`
   margin-bottom: 10px;
   padding: 6px 14px;
   border-radius: 20px;
+  transition: background-color 0.2s ease;
   cursor: pointer;
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
@@ -175,10 +185,16 @@ const UserHandle = styled.div`
 `;
 
 const ShowMore = styled.div`
-  margin-top: 30px;
+  margin-top: 20px;
   font-size: 15px;
   color: #34a5f1;
+  padding: 10px 14px;
+  border-radius: 20px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
 `;
 
 const FollowButton = styled.div`
@@ -190,6 +206,7 @@ const FollowButton = styled.div`
   border-radius: 20px;
   font-weight: bold;
   border: none;
+  transition: background-color 0.2s ease;
   cursor: pointer;
   &:hover {
     background-color: #333;
@@ -227,4 +244,40 @@ const EllipsisIcon = styled.img`
   width: 20px;
   height: 20px;
   margin-left: auto;
+`;
+
+const SearchBarWrapper = styled.div`
+  padding: 12px 16px;
+`;
+
+const SearchInputWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  padding: 8px 12px;
+  border: 1px solid #ccd6dd;
+
+  &:focus-within {
+    border-color: #1d9bf0;
+  }
+`;
+
+const SearchInput = styled.input`
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 15px;
+  color: #0f1419;
+  width: 100%;
+
+  &::placeholder {
+    color: #536471;
+  }
+`;
+
+const SearchIconImg = styled.img`
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  opacity: 0.6;
 `;

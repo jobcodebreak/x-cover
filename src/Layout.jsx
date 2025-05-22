@@ -7,11 +7,23 @@ const LayoutWrapper = styled.div`
   justify-content: center;
   min-width: 1300px;
 `;
+
+const StickyMenuBar = styled.div`
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 250px;
+  flex-shrink: 0;
+  background-color: #fff;
+`;
+
 function Layout() {
   return (
     <>
       <LayoutWrapper>
-        <MenuBar />
+        <StickyMenuBar>
+          <MenuBar />
+        </StickyMenuBar>
         <Outlet />
       </LayoutWrapper>
     </>

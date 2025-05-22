@@ -8,7 +8,7 @@ import bookmarkIcon from "../assets/icons/bookmark.svg";
 import usersIcon from "../assets/icons/users.svg";
 import moreIcon from "../assets/icons/more.svg";
 import boltIcon from "../assets/icons/bolt.svg";
-import logo from "../assets/xLogo.png";
+import logoIcon from "../assets/icons/logo.svg";
 import ellipsisIcon from "../assets/icons/ellipsis-circle.svg";
 import profileIcon from "../assets/icons/user.svg";
 import fillProfileIcon from "../assets/icons/fillProfile.svg";
@@ -17,6 +17,7 @@ import fillMagnifying from "../assets/icons/fillMagnifying-glass.svg";
 import { Link, useLocation } from "react-router-dom";
 
 const Container = styled.div`
+  min-width: 250px;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -41,11 +42,11 @@ const IconContainer = styled.button`
   background-color: transparent;
   font-size: 20px;
   padding: 10px;
+  border-radius: 20px;
+  transition: background-color 0.2s ease;
   cursor: pointer;
   &:hover {
-    background-color: whitesmoke;
-
-    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.1);
   }
 `;
 const PostBtn = styled.button`
@@ -56,6 +57,7 @@ const PostBtn = styled.button`
   border: none;
   font-size: 14px;
   font-weight: bold;
+  transition: background-color 0.2s ease;
   cursor: pointer;
   &:hover {
     background-color: #292828;
@@ -73,7 +75,12 @@ const UserBox = styled.div`
   justify-content: space-between;
   gap: 10px;
   margin-top: auto;
-  padding: 20px 0px;
+  padding: 6px 14px;
+  border-radius: 30px;
+    transition: background-color 0.2s ease;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
 `;
 
 const UserInfoWrapper = styled.div`
@@ -126,7 +133,7 @@ function MenuBar() {
   return (
     <Container>
       <Logo>
-        <Img src={logo}></Img>
+        <Img src={logoIcon}/>
       </Logo>
       {menuItems.map((item) => (
         <Link to={item.path} key={item.label}>
