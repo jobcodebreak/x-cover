@@ -7,7 +7,7 @@ const TabBox = styled.div`
   border-bottom: 1px solid #eee ;
   position:sticky;
   top:55px;
-  z-index: 99999;
+  z-index: 999;
 `;
 const TabitemWrap = styled.ul`
   display:flex;
@@ -100,14 +100,14 @@ const ImgBtn = styled(Link)`
   border-radius:50%;
   top:10px;
   right:10px;
-  z-index:999999;
+  z-index:999;
   &:hover{
     background-color: rgba(0,0,0,0.1);
   }
   img {
     width:100%;
     filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
-    z-index:999999;
+    z-index:999;
     background:none;
   }
 `
@@ -164,16 +164,17 @@ const MoreBtn = styled(Link)`
 
 // who to follows
 const ConListWrap = styled.div`
-  padding: 20px;
+padding-bottom:10px;
   border-bottom:1px solid #ddd;
-  h3{
+`;
+const Contit = styled.h3`
     font-weight: bold;
     font-size: 20px;
-  }
+    padding:12px 16px;
 `;
+
 const ItemList = styled.ul`
-  //margin:20px;
-  margin-top:20px;
+
 `;
 const UserRecommendItem = styled.li`
   display: flex;
@@ -183,7 +184,7 @@ const UserRecommendItem = styled.li`
   padding:10px;
 
   &:hover {
-    background-color: #e8f5fd;
+    background-color: rgba(0,0,0,0.02);
     border-radius: 8px;
   }
 `;
@@ -262,6 +263,7 @@ export {
   StyledLink,
   MoreBtn,
   ConListWrap,
+  Contit,
   ItemList,
   UserRecommendItem,
   Avatar,

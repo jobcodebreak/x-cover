@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ConListWrap,
+  Contit,
   ItemList,
   UserRecommendItem,
   Avatar,
@@ -34,7 +35,7 @@ const users = [
 
 const WhoToFollow = () => (
   <ConListWrap>
-    <h3>Who to follow</h3>
+    <Contit>Who to follow</Contit>
     <ItemList>
       {users.map((user, i) => (
         <UserRecommendItem key={i}>
