@@ -21,10 +21,26 @@ const Input = styled.input.attrs(props => ({
     }
 `;
 
-
+const InputCheck = ({ children, disabled, checked, onChange }) => {
+  return (
+    <label>
+      <input
+        type="checkbox"
+        style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+        disabled={disabled}
+        checked={checked}
+        onChange={({ target: { checked } }) => onChange(checked)}
+      />
+      {children}
+    </label>
+  );
+};
 
 const SearchList = () => {
   const [isModalOpen,setIsModalOpen] = useState(false);
+  const [isCheckedLocation, setIsCheckedLocation] = useState(true);
+  const [isCheckedTrend, setIsCheckedTrend] = useState(true);
+
   const handleOpen = () => setIsModalOpen(true);
   const handleClose = () => setIsModalOpen(false);
   return (
@@ -53,7 +69,10 @@ const SearchList = () => {
                 <Subtxt>이 기능을 사용하려면 지금 주변에서 무슨 일이 일어나고 있는지 알아볼 수 있습니다.</Subtxt>
               </div>
               <div>
-                <InputCheck type="checkbox" checked />
+                <InputCheck
+                  checked={isCheckedLocation}
+                  onChange={setIsCheckedLocation}
+                />
               </div>
             </Modalsetcon>
             <ModalSubtit>맞춤 설정</ModalSubtit>
@@ -63,7 +82,10 @@ const SearchList = () => {
                 <Subtxt>내 위치와 내가 팔로우하는 사람을 기반으로 트렌드를 맞춤 설정할 수 있습니다.</Subtxt>
               </div>
               <div>
-                <InputCheck type="checkbox" checked />
+                <InputCheck
+                  checked={isCheckedTrend}
+                  onChange={setIsCheckedTrend}
+                />
               </div>
             </Modalsetcon>
           </div>
@@ -183,9 +205,4 @@ const Subtxt = styled.p`
   font-weight:normal;
   word-wrap: break-word;
   letter-spacing: -0.09rem;
-`
-const InputCheck = styled.input`
-  transform : scale(1.5);
-  cursor:pointer;
-  margin:10px 0 ;
 `

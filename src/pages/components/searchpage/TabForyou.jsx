@@ -10,9 +10,11 @@ import styled from "styled-components";
 
 const TabForyou = () => {
   const trendItems = [
-    { subtit: 'Trending in Joseon', tit: '거중기', post: '1,514 posts' },
+    { subtit: 'Trending in Joseon', tit: '세책점', post: '68.1k posts' },
     { subtit: 'Trending in Joseon', tit: '한글사랑', post: '95.5k posts' },
-    { subtit: 'Trending in Joseon', tit: '경복궁', post: '42.5k posts' },
+    { subtit: 'Culture Real-time trends', tit: '경복궁', post: '42.5k posts' },
+    { subtit: 'Music Real-time trends', tit: '선농제(先農祭)', post: '12.8k posts' },
+    { subtit: 'Trending in Joseon', tit: '거중기', post: '1,514 posts' },
   ];
 
   const [isModalOpen, setModalOpen] = useState(false);

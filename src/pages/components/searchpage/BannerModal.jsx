@@ -3,14 +3,12 @@ import styled from "styled-components";
 
 const BannerModal = ({ children, handleClose, handleModalClick }) => {
   const handleOverlayClick = () => {
-    // 모달 외부를 클릭했을 때 모달을 닫도록 처리
-    handleClose();  // `handleClose`를 호출해 모달을 닫기
+    handleClose();
   };
 
   const handleModalClickInternal = (e) => {
-    // 모달 내부를 클릭하면 ImgBox 숨기고 문구 표시
-    e.stopPropagation(); // 이벤트 전파 막기
-    handleModalClick();  // ImgBox 숨기고 문구 표시
+    e.stopPropagation(); 
+    handleModalClick(); 
   };
 
   return (
@@ -35,7 +33,7 @@ const ModalBox = styled.div`
   width:100%;
   max-width:1300px;
   height:100%;
-   z-index: 9999;
+  z-index: 9999;
 `;
 const ModalContent = styled.ul`
   position: absolute;

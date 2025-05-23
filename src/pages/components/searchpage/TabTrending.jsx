@@ -3,17 +3,25 @@ import { Cont, ImgBox, ImgTxt, ImgBtn } from './styles';
 import TrendItem from './TrendItem';
 
 
-const TabForyou = () => {
+const TabTrending = () => {
   const trendItems = [
-    { subtit: '1. Trending in Joseon', tit: '거중기', post: '1,514 posts' },
-    { subtit: '2. Trending in Joseon', tit: '한글사랑', post: '95.5k posts' },
-    { subtit: '3. Trending in Joseon', tit: '경복궁', post: '42.5k posts' },
+    { subtit: 'Trending in Joseon', tit: '훈민정음', post: '1,514 posts' },
+    { subtit: 'Trending in Joseon', tit: '한글사랑', post: '95.7k posts' },
+    { subtit: 'Trending in Joseon', tit: '집현전 ', post: '42.9k posts' },
+    { subtit: 'Trending in Joseon', tit: '용비어천가 ', post: '82.2k posts' },
+    { subtit: 'Trending in Joseon', tit: '삼강행실도 ', post: '48.4k posts' },
+    { subtit: 'Trending in Joseon', tit: '제4대국왕 ', post: '85.4k posts' },
+    { subtit: 'Trending in Joseon', tit: '충녕대군 ', post: '42.5k posts' },
   ];
+    const finalItems = trendItems.map((item, index) => ({
+    ...item,
+    subtit: `${index + 1}. ${item.subtit}`,
+  }));
 
   return (
     <Cont>
       <ul>
-        {trendItems.map((item, index) => (
+        {finalItems.map((item, index) => (
           <TrendItem key={index} {...item} />
         ))}
       </ul>
@@ -21,4 +29,4 @@ const TabForyou = () => {
   );
 };
 
-export default TabForyou;
+export default TabTrending;
