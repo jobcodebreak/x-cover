@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+//====================사용자 프로필의 초기 데이터
 const initialState = {
   name: "세종대왕",
   username: "@KingSejong_theGreat",
@@ -11,24 +11,14 @@ const initialState = {
   followingCount: 1,
   followersCount: 1,
 };
-
+//====================이 슬라이스는 위에서 정의한 initialState를 기본값으로 사용
 const userProfileSlice = createSlice({
   name: "userProfile",
   initialState,
-  reducers: {
-    updateUserProfile(state, action) {
-      return { ...state, ...action.payload };
-    },
-    incrementFollowers(state) {
-      state.followersCount += 1;
-    },
-    decrementFollowers(state) {
-      state.followersCount = Math.max(0, state.followersCount - 1);
-    },
-  },
+  //====================reducers 안에는 상태를 변경하는 함수들을 정의
+  reducers: {},
 });
 
-export const { updateUserProfile, incrementFollowers, decrementFollowers } =
-  userProfileSlice.actions;
+export const selectUserProfile = (state) => state.userProfile;
 
 export default userProfileSlice.reducer;

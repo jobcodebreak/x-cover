@@ -1,4 +1,6 @@
-const trendData = [
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = [
   {
     id: 1,
     trendingIn: "Trending in Joseon",
@@ -25,4 +27,12 @@ const trendData = [
   },
 ];
 
-export default trendData;
+const trendsSlice = createSlice({
+  name: "trends",
+  initialState,
+  reducers: {},
+});
+
+export const selectTrends = (state) => state.trends;
+
+export default trendsSlice.reducer;

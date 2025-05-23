@@ -1,6 +1,116 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
+//========이미지를 넘길 때 어디서 들어오고 어디로 나갈지 애니메이션 설정========
+const slideVariants = {
+  enter: (direction) => ({
+    x: direction > 0 ? 300 : -300,
+    opacity: 0,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+  },
+  exit: (direction) => ({
+    x: direction < 0 ? 300 : -300,
+    opacity: 0,
+  }),
+};
+
+const Carousel = ({ images, currentIndex, onClose }) => {
+  const [[index, direction], setIndex] = useState([currentIndex, 0]); //이미지 상태 관리
+  //========키보드 화살표로 넘기기, Esc 키로 닫기========
+  const handleKeyDown = (e) => {
+    if (e.key === "ArrowLeft") {
+      moveSlide(-1);
+    } else if (e.key === "ArrowRight") {
+      moveSlide(1);
+    } else if (e.key === "Escape") {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
+  //==========이미지 넘기기==========
+  const moveSlide = (dir) => {
+    setIndex(([prevIdx]) => {
+      const newIndex = (prevIdx + dir + images.length) % images.length;
+      return [newIndex, dir];
+    });
+  };
+
+  const goToSlide = (i) => {
+    const dir = i > index ? 1 : -1;
+    setIndex([i, dir]);
+  };
+
+  return (
+    <AnimatePresence>
+      <Overlay
+        key="overlay"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+      >
+        <CarouselContainer
+          key="container"
+          initial={{ scale: 0.95 }}
+          animate={{ scale: 1 }}
+          exit={{ scale: 0.95 }}
+          transition={{ duration: 0.3 }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <CloseButton onClick={onClose}>✕</CloseButton>
+          <Arrow left onClick={() => moveSlide(-1)}>
+            ‹
+          </Arrow>
+
+          <ImageWrapper>
+            <AnimatePresence initial={false} custom={direction}>
+              <CarouselImage
+                key={index}
+                src={images[index]}
+                alt={`media-${index}`}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: "spring", stiffness: 300, damping: 30 },
+                  opacity: { duration: 0.2 },
+                }}
+              />
+            </AnimatePresence>
+          </ImageWrapper>
+
+          <Arrow right onClick={() => moveSlide(1)}>
+            ›
+          </Arrow>
+
+          <Thumbnails>
+            {images.map((img, i) => (
+              <Thumbnail
+                key={i}
+                src={img}
+                active={i === index}
+                onClick={() => goToSlide(i)}
+              />
+            ))}
+          </Thumbnails>
+        </CarouselContainer>
+      </Overlay>
+    </AnimatePresence>
+  );
+};
+
+export default Carousel;
+
+//==============================styled-components
 
 const Overlay = styled(motion.div)`
   position: fixed;
@@ -88,111 +198,3 @@ const Thumbnail = styled.img`
     opacity: 1;
   }
 `;
-
-const slideVariants = {
-  enter: (direction) => ({
-    x: direction > 0 ? 300 : -300,
-    opacity: 0,
-  }),
-  center: {
-    x: 0,
-    opacity: 1,
-  },
-  exit: (direction) => ({
-    x: direction < 0 ? 300 : -300,
-    opacity: 0,
-  }),
-};
-
-const Carousel = ({ images, currentIndex, onClose }) => {
-  const [[index, direction], setIndex] = useState([currentIndex, 0]);
-
-  const handleKeyDown = (e) => {
-    if (e.key === "ArrowLeft") {
-      moveSlide(-1);
-    } else if (e.key === "ArrowRight") {
-      moveSlide(1);
-    } else if (e.key === "Escape") {
-      onClose();
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, []);
-
-  const moveSlide = (dir) => {
-    setIndex(([prevIdx]) => {
-      const newIndex = (prevIdx + dir + images.length) % images.length;
-      return [newIndex, dir];
-    });
-  };
-
-  const goToSlide = (i) => {
-    const dir = i > index ? 1 : -1;
-    setIndex([i, dir]);
-  };
-
-  return (
-    <AnimatePresence>
-      <Overlay
-        key="overlay"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        onClick={onClose}
-      >
-        <CarouselContainer
-          key="container"
-          initial={{ scale: 0.95 }}
-          animate={{ scale: 1 }}
-          exit={{ scale: 0.95 }}
-          transition={{ duration: 0.3 }}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <CloseButton onClick={onClose}>✕</CloseButton>
-          <Arrow left onClick={() => moveSlide(-1)}>
-            ‹
-          </Arrow>
-
-          <ImageWrapper>
-            <AnimatePresence initial={false} custom={direction}>
-              <CarouselImage
-                key={index}
-                src={images[index]}
-                alt={`media-${index}`}
-                custom={direction}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{
-                  x: { type: "spring", stiffness: 300, damping: 30 },
-                  opacity: { duration: 0.2 },
-                }}
-              />
-            </AnimatePresence>
-          </ImageWrapper>
-
-          <Arrow right onClick={() => moveSlide(1)}>
-            ›
-          </Arrow>
-
-          <Thumbnails>
-            {images.map((img, i) => (
-              <Thumbnail
-                key={i}
-                src={img}
-                active={i === index}
-                onClick={() => goToSlide(i)}
-              />
-            ))}
-          </Thumbnails>
-        </CarouselContainer>
-      </Overlay>
-    </AnimatePresence>
-  );
-};
-
-export default Carousel;

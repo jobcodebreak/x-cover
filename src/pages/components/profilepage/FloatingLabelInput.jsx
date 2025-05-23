@@ -1,7 +1,47 @@
-// src/components/FloatingLabelInput.jsx
-
 import React, { useState } from "react";
 import styled from "styled-components";
+
+const FloatingLabelInput = ({
+  label,
+  value,
+  onChange,
+  height,
+  maxLength,
+  showCharCount = false,
+  type = "text",
+  ...props
+}) => {
+  const [focused, setFocused] = useState(false);
+  const isActive = focused || value;
+
+  const InputTag = type === "textarea" ? "textarea" : "input";
+
+  return (
+    <Wrapper>
+      <StyledInput
+        as={InputTag}
+        type={type}
+        value={value}
+        onFocus={() => setFocused(true)}
+        onBlur={(e) => setFocused(!!e.target.value)}
+        onChange={onChange}
+        height={height}
+        maxLength={maxLength}
+        {...props}
+      />
+      <Label active={isActive}>{label}</Label>
+      {showCharCount && maxLength && focused && (
+        <CharCount>
+          {value.length} / {maxLength}
+        </CharCount>
+      )}
+    </Wrapper>
+  );
+};
+
+export default FloatingLabelInput;
+
+//==============================styled-components
 
 const Wrapper = styled.div`
   position: relative;
@@ -46,43 +86,3 @@ const CharCount = styled.div`
   font-size: 13px;
   color: #657786;
 `;
-
-const FloatingLabelInput = ({
-  label,
-  value,
-  onChange,
-  height,
-  maxLength,
-  showCharCount = false,
-  type = "text",
-  ...props
-}) => {
-  const [focused, setFocused] = useState(false);
-  const isActive = focused || value;
-
-  const InputTag = type === "textarea" ? "textarea" : "input";
-
-  return (
-    <Wrapper>
-      <StyledInput
-        as={InputTag}
-        type={type}
-        value={value}
-        onFocus={() => setFocused(true)}
-        onBlur={(e) => setFocused(!!e.target.value)}
-        onChange={onChange}
-        height={height}
-        maxLength={maxLength}
-        {...props}
-      />
-      <Label active={isActive}>{label}</Label>
-      {showCharCount && maxLength && focused && (
-        <CharCount>
-          {value.length} / {maxLength}
-        </CharCount>
-      )}
-    </Wrapper>
-  );
-};
-
-export default FloatingLabelInput;

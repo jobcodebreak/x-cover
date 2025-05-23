@@ -1,3 +1,5 @@
+// 사용자의 프로필 정보, 탭 메뉴 (Posts, Replies, Media 등), 팔로우 추천, 모달 창, 캐러셀(이미지 뷰어) 등을 포함한 SNS 스타일 프로필 페이지
+
 import styled from "styled-components";
 import { FaArrowLeft, FaCalendarAlt, FaLock } from "react-icons/fa";
 import ProfileTabs from "./ProfileTabs";
@@ -7,16 +9,17 @@ import ReplieCard from "./ReplieCard";
 import EditProfileModal from "./EditProfileModal";
 import { useNavigate } from "react-router-dom";
 import Carousel from "./Carousel";
-import posts from "./data/posts";
-import userRecommendations from "./data/userRecommendations";
-import replies from "./data/replies";
 import { useSelector } from "react-redux";
+import { selectUserRecommendations } from "../../../slices/userRecommendationsSlice";
+import { selectUserProfile } from "../../../slices/userProfileSlice";
+import { selectPosts } from "../../../slices/postsSlice";
+import { selectReplies } from "../../../slices/repliesSlice";
 
 const ProfilePage = () => {
   //==============================프로필 탭 관련
   const [activeTab, setActiveTab] = useState("Posts");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  //==============================모달 관련
+  //==============================프로필 수정 모달
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   //==============================캐러셀에 사용되는 이미지
@@ -26,7 +29,7 @@ const ProfilePage = () => {
   ];
   const [isCarouselOpen, setIsCarouselOpen] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
-  //==============================캐러셀 관련
+  //==============================이미지 캐러셀 (Media 탭)
   const openCarousel = (index) => {
     setCarouselIndex(index);
     setIsCarouselOpen(true);
@@ -45,8 +48,11 @@ const ProfilePage = () => {
   const handleShowMore = () => {
     setUserRepeatCount((prev) => prev + 1);
   };
-  //==============================useSelector사용해 userProfile상태 가져오기
-  const user = useSelector((state) => state.userProfile);
+  //==============================useSelector사용해 상태 가져오기
+  const UP = useSelector(selectUserProfile);
+  const UR = useSelector(selectUserRecommendations);
+  const Po = useSelector(selectPosts);
+  const Re = useSelector(selectReplies);
   //============================== 모달 열릴 때 스크롤 막기
   useEffect(() => {
     if (isModalOpen) {
@@ -62,42 +68,47 @@ const ProfilePage = () => {
 
   return (
     <Container>
+      {/* ===== 헤더 ===== */}
       <Header>
         <BackIcon onClick={handleBackClick} />
         <HeaderInfo>
-          <Name>{user.name}</Name>
-          <Tweets>{user.postsCount} posts</Tweets>
+          <Name>{UP.name}</Name>
+          <Tweets>{UP.postsCount} posts</Tweets>
         </HeaderInfo>
       </Header>
+      {/* ===== 프로필 ===== */}
       <Banner />
       <EditProfile>
         <EditButton onClick={openModal}>Edit profile</EditButton>
       </EditProfile>
       {isModalOpen && <EditProfileModal onClose={closeModal} />}
-      <Avatar src={user.avatar} />
+      <Avatar src={UP.avatar} />
+      {/* ===== 유저 정보 ===== */}
       <ProfileContent>
         <NameTag>
-          <DisplayName>{user.name}</DisplayName>
-          <Username>{user.username}</Username>
+          <DisplayName>{UP.name}</DisplayName>
+          <Username>{UP.username}</Username>
         </NameTag>
-        <Bio>{user.bio}</Bio>
+        <Bio>{UP.bio}</Bio>
         <Joined>
           <FaCalendarAlt size={14} style={{ marginRight: "4px" }} />
-          Joined {user.joinedDate}
+          Joined {UP.joinedDate}
         </Joined>
         <FollowStats>
           <span>
-            <strong>{user.followingCount}</strong> Following
+            <strong>{UP.followingCount}</strong> Following
           </span>
           <span>
-            <strong>{user.followersCount}</strong> Followers
+            <strong>{UP.followersCount}</strong> Followers
           </span>
         </FollowStats>
       </ProfileContent>
+      {/* 탭 UI를 표시하고 조작할 수 있도록 props를 넘겨주는 구조 */}
       <ProfileTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+      {/* ===== 탭 메뉴 ===== */}
       {activeTab === "Posts" && (
         <>
-          {posts.map((post, index) => (
+          {Po.map((post, index) => (
             <PostCard
               key={index}
               profileImage={post.profileImage}
@@ -112,8 +123,9 @@ const ProfilePage = () => {
           <Section>
             <SectionTitle>Who to follow</SectionTitle>
             <UserRecommendList>
+              {/* 유저 리스트를 userRepeatCount만큼 반복해서 화면에 보여주고, 각각을 UserRecommendItem 컴포넌트로 만들어 렌더링 */}
               {Array.from({ length: userRepeatCount }).flatMap((_, i) =>
-                userRecommendations.map((user) => (
+                UR.map((user) => (
                   <UserRecommendItem key={`${user.id}-${i}`}>
                     <SectionAvatar src={user.avatar} alt={user.name} />
                     <div>
@@ -132,7 +144,7 @@ const ProfilePage = () => {
       )}
       {activeTab === "Replies" && (
         <>
-          {replies.map((reply) => (
+          {Re.map((reply) => (
             <ReplieCard
               key={reply.id}
               profileImage={reply.profileImage}
@@ -145,7 +157,7 @@ const ProfilePage = () => {
               postImage={reply.postImage}
             />
           ))}
-          {posts.map((post, index) => (
+          {Po.map((post, index) => (
             <PostCard
               key={index}
               profileImage={post.profileImage}
@@ -161,7 +173,7 @@ const ProfilePage = () => {
             <SectionTitle>Who to follow</SectionTitle>
             <UserRecommendList>
               {Array.from({ length: userRepeatCount }).flatMap((_, i) =>
-                userRecommendations.map((user) => (
+                UR.map((user) => (
                   <UserRecommendItem key={`${user.id}-${i}`}>
                     <SectionAvatar src={user.avatar} alt={user.name} />
                     <div>
@@ -204,6 +216,7 @@ const ProfilePage = () => {
       {activeTab === "Media" && (
         <>
           <MediaSection>
+            {/* 썸네일 목록을 화면에 출력하는 코드 */}
             {mediaImages.map((img, idx) => (
               <Media key={idx} onClick={() => openCarousel(idx)}>
                 <MediaImg src={img} />
@@ -233,7 +246,7 @@ const ProfilePage = () => {
 
 export default ProfilePage;
 
-// ======================= styled-components =========================
+//==============================styled-components
 
 const Container = styled.div`
   font-family: system-ui, sans-serif;

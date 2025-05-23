@@ -96,7 +96,8 @@ const ReplieCard = ({
 
 export default ReplieCard;
 
-// ======================= styled-components =========================
+//==============================styled-components
+
 const CardContainer = styled.div`
   max-width: 600px;
   display: flex;
