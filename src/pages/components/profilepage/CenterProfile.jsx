@@ -7,53 +7,54 @@ import ReplieCard from "./ReplieCard";
 import EditProfileModal from "./EditProfileModal";
 import { useNavigate } from "react-router-dom";
 import Carousel from "./Carousel";
-import UserProfile from "./data/UserProfile";
 import posts from "./data/posts";
 import userRecommendations from "./data/userRecommendations";
 import replies from "./data/replies";
+import { useSelector } from "react-redux";
 
 const ProfilePage = () => {
+  //==============================프로필 탭 관련
   const [activeTab, setActiveTab] = useState("Posts");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  //==============================모달 관련
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-
+  //==============================캐러셀에 사용되는 이미지
   const mediaImages = [
     "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Seoul-Gyeongbokgung-Sundial-02.jpg/330px-Seoul-Gyeongbokgung-Sundial-02.jpg",
     "https://mblogthumb-phinf.pstatic.net/MjAyNTAxMjJfMTg4/MDAxNzM3NTQ1NzY1MDc0.Pgcv6JXSxrh1KHXVB2c2X5rJ8FHDrsvsQ5-35AWa0asg.urpL4d0Xau_DkMR-UDeFJT09h0whunwWcezTf9wawu0g.JPEG/image.JPEG?type=w800",
   ];
   const [isCarouselOpen, setIsCarouselOpen] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
-
+  //==============================캐러셀 관련
   const openCarousel = (index) => {
     setCarouselIndex(index);
     setIsCarouselOpen(true);
   };
-
   const closeCarousel = () => {
     setIsCarouselOpen(false);
   };
-
-  //useNavigate사용 백 아이콘 클릭 시 홈으로
+  //==============================useNavigate사용 백 아이콘 클릭 시 홈으로
   const navigate = useNavigate();
   const handleBackClick = () => {
     navigate("/");
   };
-  //반복 횟수 상태 추가
+  //==============================반복 횟수 상태 추가
   const [userRepeatCount, setUserRepeatCount] = useState(1);
-  //Show more 클릭 시 반복 수 증가
+  //==============================Show more 클릭 시 반복 수 증가
   const handleShowMore = () => {
     setUserRepeatCount((prev) => prev + 1);
   };
-
-  // 모달 열릴 때 스크롤 막기
+  //==============================useSelector사용해 userProfile상태 가져오기
+  const user = useSelector((state) => state.userProfile);
+  //============================== 모달 열릴 때 스크롤 막기
   useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
-    // 컴포넌트 unmount 시 스크롤 원복
+    //============================== 컴포넌트 unmount 시 스크롤 원복
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -64,8 +65,8 @@ const ProfilePage = () => {
       <Header>
         <BackIcon onClick={handleBackClick} />
         <HeaderInfo>
-          <Name>{UserProfile.name}</Name>
-          <Tweets>{UserProfile.postsCount} posts</Tweets>
+          <Name>{user.name}</Name>
+          <Tweets>{user.postsCount} posts</Tweets>
         </HeaderInfo>
       </Header>
       <Banner />
@@ -73,23 +74,23 @@ const ProfilePage = () => {
         <EditButton onClick={openModal}>Edit profile</EditButton>
       </EditProfile>
       {isModalOpen && <EditProfileModal onClose={closeModal} />}
-      <Avatar src={UserProfile.avatar} />
+      <Avatar src={user.avatar} />
       <ProfileContent>
         <NameTag>
-          <DisplayName>{UserProfile.name}</DisplayName>
-          <Username>{UserProfile.username}</Username>
+          <DisplayName>{user.name}</DisplayName>
+          <Username>{user.username}</Username>
         </NameTag>
-        <Bio>{UserProfile.bio}</Bio>
+        <Bio>{user.bio}</Bio>
         <Joined>
           <FaCalendarAlt size={14} style={{ marginRight: "4px" }} />
-          Joined {UserProfile.joinedDate}
+          Joined {user.joinedDate}
         </Joined>
         <FollowStats>
           <span>
-            <strong>{UserProfile.followingCount}</strong> Following
+            <strong>{user.followingCount}</strong> Following
           </span>
           <span>
-            <strong>{UserProfile.followersCount}</strong> Followers
+            <strong>{user.followersCount}</strong> Followers
           </span>
         </FollowStats>
       </ProfileContent>
