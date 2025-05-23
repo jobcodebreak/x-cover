@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-
+//tabmenu
 const TabBox = styled.div`
   // outline: 1px solid red;
   border-bottom: 1px solid #eee ;
   position:sticky;
-  top:52px;
-  z-index: 99999;
+  top:55px;
+  z-index: 999;
 `;
 const TabitemWrap = styled.ul`
   display:flex;
@@ -58,7 +58,7 @@ const TabTit = styled.span`
   color: gray;
 `;
 
-// TabContent css
+// TabContent_Tabforyou
 const Cont = styled.div`
   width:600px;
 `;
@@ -92,15 +92,23 @@ const ImgTxt = styled.div`
   }
 `;
 const ImgBtn = styled(Link)`
-  width:30px;
-  height:30px;
+  width:40px;
+  height:40px;
   display:block;
   position:absolute;
-  top:0;
-  right:0;
+  padding:5px;
+  border-radius:50%;
+  top:10px;
+  right:10px;
+  z-index:999;
+  &:hover{
+    background-color: rgba(0,0,0,0.1);
+  }
   img {
     width:100%;
-    // filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+    z-index:999;
+    background:none;
   }
 `
 
@@ -109,7 +117,7 @@ const Test = styled.div`
 `;
 
 
-// 트렌드 아이템 
+// trenditem
 const Trenditem = styled.li`
   display:flex;
   justify-content: space-between;
@@ -154,18 +162,19 @@ const MoreBtn = styled(Link)`
   }
 `;
 
-// 팔로우 추천
+// who to follows
 const ConListWrap = styled.div`
-  padding: 20px;
+padding-bottom:10px;
   border-bottom:1px solid #ddd;
-  h3{
+`;
+const Contit = styled.h3`
     font-weight: bold;
     font-size: 20px;
-  }
+    padding:12px 16px;
 `;
+
 const ItemList = styled.ul`
-  //margin:20px;
-  margin-top:20px;
+
 `;
 const UserRecommendItem = styled.li`
   display: flex;
@@ -175,7 +184,7 @@ const UserRecommendItem = styled.li`
   padding:10px;
 
   &:hover {
-    background-color: #e8f5fd;
+    background-color: rgba(0,0,0,0.02);
     border-radius: 8px;
   }
 `;
@@ -245,7 +254,7 @@ export {
   TabitemWrap,
   Tabitem,
   ContentBox,
-  TabTit, // ✅ 이거 포함되었는지 꼭 확인
+  TabTit,
   Cont,
   ImgBox,
   ImgTxt,
@@ -254,6 +263,7 @@ export {
   StyledLink,
   MoreBtn,
   ConListWrap,
+  Contit,
   ItemList,
   UserRecommendItem,
   Avatar,

@@ -12,21 +12,22 @@ import {
   FaShare,
 } from "react-icons/fa";
 
-const PostCard = ({
+const ReplieCard = ({
   profileImage,
   displayName,
   username,
   date,
+  replyingTo,
   text,
   hashtag,
   postImage,
 }) => {
   const [isLikeActive, setIsLikeActive] = useState(false);
   const [isBookmarkActive, setIsBookmarkActive] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   const handleLikeClick = () => setIsLikeActive((prev) => !prev);
   const handleBookmarkClick = () => setIsBookmarkActive((prev) => !prev);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
@@ -40,6 +41,10 @@ const PostCard = ({
             @{username} · {date}
           </Username>
         </Header>
+        <Header2>
+          <Label>Replying to</Label>
+          <ReplyingTo>{replyingTo}</ReplyingTo>
+        </Header2>
         <Text>{text}</Text>
         <Hashtag>{hashtag}</Hashtag>
         <PostImage src={postImage} />
@@ -48,7 +53,20 @@ const PostCard = ({
             <CommentButton onClick={openModal}>
               <FaRegComment />
             </CommentButton>
-            {isModalOpen && <CommentModal onClose={closeModal} />}
+            {isModalOpen && (
+              <CommentModal
+                onClose={closeModal}
+                post={{
+                  profileImage,
+                  displayName,
+                  username,
+                  date,
+                  text,
+                  hashtag,
+                  postImage,
+                }}
+              />
+            )}
             <RetweetButton>
               <FaRetweet />
             </RetweetButton>
@@ -76,7 +94,7 @@ const PostCard = ({
   );
 };
 
-export default PostCard;
+export default ReplieCard;
 
 // ======================= styled-components =========================
 const CardContainer = styled.div`
@@ -96,6 +114,10 @@ const ProfileImage = styled.img`
   height: 48px;
   border-radius: 50%;
   margin-right: 12px;
+  transition: filter 0.2s ease;
+  &:hover {
+    filter: brightness(0.9);
+  }
 `;
 
 const Content = styled.div`
@@ -112,11 +134,32 @@ const Header = styled.div`
 const DisplayName = styled.span`
   font-size: 16px;
   font-weight: bold;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Username = styled.span`
   color: #657786;
   font-weight: 500;
+`;
+
+const Header2 = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 4px 0;
+`;
+
+const Label = styled.div`
+  color: #657786;
+`;
+
+const ReplyingTo = styled.div`
+  color: #1da1f2;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Text = styled.div`

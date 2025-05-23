@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import RightSidebar from "../components/RightSidebar";
-import CenterProfile from "../components/CenterProfile";
+import CenterProfile from "../pages/components/profilepage/CenterProfile";
 
 const Container = styled.div`
   display: flex;
@@ -18,9 +18,9 @@ const CenterArea = styled.main`
 
 const StickySidebarWrapper = styled.aside`
   flex: 1;
-  position: sticky;
   top: 0px;
   height: fit-content;
+  position: sticky;
 `;
 
 export default function ProfilePage() {

@@ -1,112 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import ellipsisIcon from "../assets/icons/ellipsis-circle.svg";
 import searchIcon from "../assets/icons/fillMagnifying-glass.svg";
+import userRecommendations from "./data/userRecommendations";
+import trendData from "./data/trendData";
 
 export default function RightSidebar() {
+  //userRepeatCount 와 trendRepeatCount 두 개의 상태를 사용해 각각 리스트의 반복 횟수를 관리
+  const [userRepeatCount, setUserRepeatCount] = useState(1);
+  const [trendRepeatCount, setTrendRepeatCount] = useState(1);
+  const handleUserShowMore = () => {
+    setUserRepeatCount((prev) => prev + 1);
+  };
+  const handleTrendShowMore = () => {
+    setTrendRepeatCount((prev) => prev + 1);
+  };
   return (
     <SidebarContainer>
-      <SearchBarWrapper>
-        <SearchInputWrapper>
-          <SearchIconImg src={searchIcon} alt="Search" />
-          <SearchInput type="text" placeholder="Search" />
-        </SearchInputWrapper>
-      </SearchBarWrapper>
-
+      <Header>
+        <SearchBarWrapper>
+          <SearchInputWrapper>
+            <SearchIconImg src={searchIcon} alt="Search" />
+            <SearchInput type="text" placeholder="Search" />
+          </SearchInputWrapper>
+        </SearchBarWrapper>
+      </Header>
       <Section>
         <SectionTitle>You might like</SectionTitle>
         <UserRecommendList>
-          <UserRecommendItem>
-            <Avatar
-              src="https://i0.wp.com/yoonsb.com/wp-content/uploads/2016/11/2016-11-03-135719.png?fit=751%2C475&ssl=1"
-              alt="User1"
-            />
-            <div>
-              <UserName>이순신</UserName>
-              <UserHandle>@lee_soonshin</UserHandle>
-            </div>
-            <FollowButton>Follow</FollowButton>
-          </UserRecommendItem>
-
-          <UserRecommendItem>
-            <Avatar
-              src="https://i.namu.wiki/i/cmDI70T4ElYmbvqhMauKsmFl5FdhE-5Cg0xl15leKlILTfrb4qhjGRLopJ3aXKpRAKUTGH-uluOhUpUEagSmPPLR-Cf0GnucY3Kieo3hEmZpftmuWdvCudt23GVuzx5qt0LaBW1Fkl-VDGAVeJlw3Q.webp"
-              alt="User2"
-            />
-            <div>
-              <UserName>신사임당</UserName>
-              <UserHandle>@shin_saimdang</UserHandle>
-            </div>
-            <FollowButton>Follow</FollowButton>
-          </UserRecommendItem>
-          <UserRecommendItem>
-            <Avatar
-              src="https://i.namu.wiki/i/vpUa0g7EoXzqchiUVKsRW74FQDQ9e2LgMoJMduYKddgaf29SGt1vOBn1ise7MKXyJR9tf-_FADCpi2SrqwNPT1pJCP0M6-hTYY6z8csebJ6LX1iS8zUW6WD18KK81ohBwqVoOJPG75wThC9F-ar4UA.webp"
-              alt="User3"
-            />
-            <div>
-              <UserName>이황</UserName>
-              <UserHandle>@yi_hwang</UserHandle>
-            </div>
-            <FollowButton>Follow</FollowButton>
-          </UserRecommendItem>
+          {/* //각 리스트는 Array.from({ length: count }).flatMap(...) 으로 count만큼 데이터 반복 렌더링 */}
+          {Array.from({ length: userRepeatCount }).flatMap((_, i) =>
+            userRecommendations.map((user) => (
+              // key 값에 반복 index를 추가해서 React의 key 중복 경고 방지
+              <UserRecommendItem key={`${user.id}-${i}`}>
+                <Avatar src={user.avatar} alt={user.alt} />
+                <div>
+                  <UserName>{user.name}</UserName>
+                  <UserHandle>{user.handle}</UserHandle>
+                </div>
+                <FollowButton>Follow</FollowButton>
+              </UserRecommendItem>
+            ))
+          )}
         </UserRecommendList>
-        <ShowMore>Show more</ShowMore>
+        <ShowMore onClick={handleUserShowMore}>Show more</ShowMore>
       </Section>
 
       <Section>
         <SectionTitle>What’s happening</SectionTitle>
         <TrendList>
-          <TrendItem>
-            <ItemBox>
-              <ItemInfoWrapper>
-                <ItemTag>
-                  <TrendingIn>Trending in Joseon</TrendingIn>
-                  <Itemname>무인정사</Itemname>
-                  <TrendTweets>20.7K posts</TrendTweets>
-                </ItemTag>
-              </ItemInfoWrapper>
-              <EllipsisIcon src={ellipsisIcon} />
-            </ItemBox>
-          </TrendItem>
-          <TrendItem>
-            <ItemBox>
-              <ItemInfoWrapper>
-                <ItemTag>
-                  <TrendingIn>Trending in Joseon</TrendingIn>
-                  <Itemname>박포의 난</Itemname>
-                  <TrendTweets>18.1K posts</TrendTweets>
-                </ItemTag>
-              </ItemInfoWrapper>
-              <EllipsisIcon src={ellipsisIcon} />
-            </ItemBox>
-          </TrendItem>
-          <TrendItem>
-            <ItemBox>
-              <ItemInfoWrapper>
-                <ItemTag>
-                  <TrendingIn>Trending in Joseon</TrendingIn>
-                  <Itemname>한양 대화재</Itemname>
-                  <TrendTweets>43.8K posts</TrendTweets>
-                </ItemTag>
-              </ItemInfoWrapper>
-              <EllipsisIcon src={ellipsisIcon} />
-            </ItemBox>
-          </TrendItem>
-          <TrendItem>
-            <ItemBox>
-              <ItemInfoWrapper>
-                <ItemTag>
-                  <TrendingIn>Trending in Joseon</TrendingIn>
-                  <Itemname>노비종모법</Itemname>
-                  <TrendTweets>2,096 posts</TrendTweets>
-                </ItemTag>
-              </ItemInfoWrapper>
-              <EllipsisIcon src={ellipsisIcon} />
-            </ItemBox>
-          </TrendItem>
+          {Array.from({ length: trendRepeatCount }).flatMap((_, i) =>
+            trendData.map(({ id, trendingIn, itemName, trendTweets }) => (
+              <TrendItem key={`${id}-${i}`}>
+                <ItemBox>
+                  <ItemInfoWrapper>
+                    <ItemTag>
+                      <TrendingIn>{trendingIn}</TrendingIn>
+                      <Itemname>{itemName}</Itemname>
+                      <TrendTweets>{trendTweets}</TrendTweets>
+                    </ItemTag>
+                  </ItemInfoWrapper>
+                  <EllipsisIcon src={ellipsisIcon} />
+                </ItemBox>
+              </TrendItem>
+            ))
+          )}
         </TrendList>
-        <ShowMore>Show more</ShowMore>
+        <ShowMore onClick={handleTrendShowMore}>Show more</ShowMore>
       </Section>
     </SidebarContainer>
   );
@@ -114,12 +74,20 @@ export default function RightSidebar() {
 
 // ======================= styled-components =========================
 
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+`;
+
 const SidebarContainer = styled.aside`
   font-family: system-ui, sans-serif;
   flex: 1;
   min-width: 350px;
   height: fit-content;
-  padding: 20px 0px;
 `;
 
 const Section = styled.section`
@@ -173,6 +141,10 @@ const Avatar = styled.img`
   height: 36px;
   border-radius: 50%;
   margin-right: 10px;
+  transition: filter 0.2s ease;
+  &:hover {
+    filter: brightness(0.9);
+  }
 `;
 
 const UserName = styled.div`
@@ -248,6 +220,7 @@ const EllipsisIcon = styled.img`
 
 const SearchBarWrapper = styled.div`
   padding: 12px 16px;
+  min-width: 350px;
 `;
 
 const SearchInputWrapper = styled.div`

@@ -1,23 +1,35 @@
+import React, { useState } from "react";
 import styled from "styled-components";
+import CommentModal from "./CommentModal";
 import {
   FaRegHeart,
+  FaHeart,
   FaRegComment,
   FaRetweet,
   FaChartBar,
   FaRegBookmark,
+  FaBookmark,
   FaShare,
 } from "react-icons/fa";
 
-const ReplieCard = ({
+const PostCard = ({
   profileImage,
   displayName,
   username,
   date,
-  replyingTo,
   text,
   hashtag,
   postImage,
 }) => {
+  const [isLikeActive, setIsLikeActive] = useState(false);
+  const [isBookmarkActive, setIsBookmarkActive] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleLikeClick = () => setIsLikeActive((prev) => !prev);
+  const handleBookmarkClick = () => setIsBookmarkActive((prev) => !prev);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <CardContainer>
       <ProfileImage src={profileImage} />
@@ -28,31 +40,44 @@ const ReplieCard = ({
             @{username} · {date}
           </Username>
         </Header>
-        <Header2>
-          <Label>Replying to</Label>
-          <ReplyingTo>{replyingTo}</ReplyingTo>
-        </Header2>
         <Text>{text}</Text>
         <Hashtag>{hashtag}</Hashtag>
         <PostImage src={postImage} />
         <Actions>
           <LeftActions>
-            <CommentButton>
+            <CommentButton onClick={openModal}>
               <FaRegComment />
             </CommentButton>
+            {isModalOpen && (
+              <CommentModal
+                onClose={closeModal}
+                post={{
+                  profileImage,
+                  displayName,
+                  username,
+                  date,
+                  text,
+                  hashtag,
+                  postImage,
+                }}
+              />
+            )}
             <RetweetButton>
               <FaRetweet />
             </RetweetButton>
-            <LikeButton>
-              <FaRegHeart />
+            <LikeButton active={isLikeActive} onClick={handleLikeClick}>
+              {isLikeActive ? <FaHeart /> : <FaRegHeart />}
             </LikeButton>
             <ViewButton>
               <FaChartBar />
             </ViewButton>
           </LeftActions>
           <RightActions>
-            <BookmarkButton>
-              <FaRegBookmark />
+            <BookmarkButton
+              active={isBookmarkActive}
+              onClick={handleBookmarkClick}
+            >
+              {isBookmarkActive ? <FaBookmark /> : <FaRegBookmark />}
             </BookmarkButton>
             <SharekButton>
               <FaShare />
@@ -64,7 +89,7 @@ const ReplieCard = ({
   );
 };
 
-export default ReplieCard;
+export default PostCard;
 
 // ======================= styled-components =========================
 const CardContainer = styled.div`
@@ -84,6 +109,10 @@ const ProfileImage = styled.img`
   height: 48px;
   border-radius: 50%;
   margin-right: 12px;
+  transition: filter 0.2s ease;
+  &:hover {
+    filter: brightness(0.9);
+  }
 `;
 
 const Content = styled.div`
@@ -100,29 +129,14 @@ const Header = styled.div`
 const DisplayName = styled.span`
   font-size: 16px;
   font-weight: bold;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Username = styled.span`
   color: #657786;
   font-weight: 500;
-`;
-
-const Header2 = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 4px 0;
-`;
-
-const Label = styled.div`
-  color: #657786;
-`;
-
-const ReplyingTo = styled.div`
-  color: #1da1f2;
-
-  &:hover {
-    text-decoration: underline;
-  }
 `;
 
 const Text = styled.div`
@@ -179,11 +193,17 @@ const CommentButton = styled(IconButtonBase)`
   &:hover {
     background-color: rgba(29, 161, 242, 0.1);
   }
+  &:hover svg {
+    fill: rgb(29, 161, 242);
+  }
 `;
 
 const RetweetButton = styled(IconButtonBase)`
   &:hover {
     background-color: rgba(23, 191, 99, 0.1);
+  }
+  &:hover svg {
+    fill: rgb(23, 191, 99);
   }
 `;
 
@@ -191,11 +211,21 @@ const LikeButton = styled(IconButtonBase)`
   &:hover {
     background-color: rgba(224, 36, 94, 0.1);
   }
+  &:hover svg {
+    fill: rgb(224, 36, 94);
+  }
+  svg {
+    fill: ${({ active }) => (active ? "rgb(224, 36, 94)" : "#657786;")};
+    transition: fill 0.2s ease;
+  }
 `;
 
 const ViewButton = styled(IconButtonBase)`
   &:hover {
     background-color: rgba(136, 153, 166, 0.1);
+  }
+  &:hover svg {
+    fill: rgb(136, 153, 166);
   }
 `;
 
@@ -214,10 +244,20 @@ const BookmarkButton = styled(IconButtonBase)`
   &:hover {
     background-color: rgba(29, 161, 242, 0.1);
   }
+  &:hover svg {
+    fill: rgb(29, 161, 242);
+  }
+  svg {
+    fill: ${({ active }) => (active ? "rgb(29, 161, 242)" : "#657786;")};
+    transition: fill 0.2s ease;
+  }
 `;
 
 const SharekButton = styled(IconButtonBase)`
   &:hover {
     background-color: rgba(29, 161, 242, 0.1);
+  }
+  &:hover svg {
+    fill: rgb(29, 161, 242);
   }
 `;
