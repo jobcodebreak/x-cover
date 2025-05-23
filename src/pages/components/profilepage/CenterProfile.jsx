@@ -39,6 +39,13 @@ const ProfilePage = () => {
   const handleBackClick = () => {
     navigate("/");
   };
+  //반복 횟수 상태 추가
+  const [userRepeatCount, setUserRepeatCount] = useState(1);
+  //Show more 클릭 시 반복 수 증가
+  const handleShowMore = () => {
+    setUserRepeatCount((prev) => prev + 1);
+  };
+
   // 모달 열릴 때 스크롤 막기
   useEffect(() => {
     if (isModalOpen) {
@@ -104,19 +111,21 @@ const ProfilePage = () => {
           <Section>
             <SectionTitle>Who to follow</SectionTitle>
             <UserRecommendList>
-              {userRecommendations.map((user, index) => (
-                <UserRecommendItem key={index}>
-                  <SectionAvatar src={user.avatar} alt={`User${index + 1}`} />
-                  <div>
-                    <UserName>{user.name}</UserName>
-                    <UserHandle>{user.handle}</UserHandle>
-                    <UserComment>{user.comment}</UserComment>
-                  </div>
-                  <FollowButton>Follow</FollowButton>
-                </UserRecommendItem>
-              ))}
+              {Array.from({ length: userRepeatCount }).flatMap((_, i) =>
+                userRecommendations.map((user) => (
+                  <UserRecommendItem key={`${user.id}-${i}`}>
+                    <SectionAvatar src={user.avatar} alt={user.name} />
+                    <div>
+                      <UserName>{user.name}</UserName>
+                      <UserHandle>{user.handle}</UserHandle>
+                      <UserComment>{user.comment}</UserComment>
+                    </div>
+                    <FollowButton>Follow</FollowButton>
+                  </UserRecommendItem>
+                ))
+              )}
             </UserRecommendList>
-            <ShowMore>Show more</ShowMore>
+            <ShowMore onClick={handleShowMore}>Show more</ShowMore>
           </Section>
         </>
       )}
@@ -150,19 +159,21 @@ const ProfilePage = () => {
           <Section>
             <SectionTitle>Who to follow</SectionTitle>
             <UserRecommendList>
-              {userRecommendations.map((user, index) => (
-                <UserRecommendItem key={index}>
-                  <SectionAvatar src={user.avatar} alt={`User${index + 1}`} />
-                  <div>
-                    <UserName>{user.name}</UserName>
-                    <UserHandle>{user.handle}</UserHandle>
-                    <UserComment>{user.comment}</UserComment>
-                  </div>
-                  <FollowButton>Follow</FollowButton>
-                </UserRecommendItem>
-              ))}
+              {Array.from({ length: userRepeatCount }).flatMap((_, i) =>
+                userRecommendations.map((user) => (
+                  <UserRecommendItem key={`${user.id}-${i}`}>
+                    <SectionAvatar src={user.avatar} alt={user.name} />
+                    <div>
+                      <UserName>{user.name}</UserName>
+                      <UserHandle>{user.handle}</UserHandle>
+                      <UserComment>{user.comment}</UserComment>
+                    </div>
+                    <FollowButton>Follow</FollowButton>
+                  </UserRecommendItem>
+                ))
+              )}
             </UserRecommendList>
-            <ShowMore>Show more</ShowMore>
+            <ShowMore onClick={handleShowMore}>Show more</ShowMore>
           </Section>
         </>
       )}
