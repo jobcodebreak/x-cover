@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import CommentModal from "./CommentModal";
 import {
   FaRegHeart,
   FaHeart,
@@ -26,6 +27,10 @@ const ReplieCard = ({
   const handleLikeClick = () => setIsLikeActive((prev) => !prev);
   const handleBookmarkClick = () => setIsBookmarkActive((prev) => !prev);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <CardContainer>
       <ProfileImage src={profileImage} />
@@ -45,9 +50,23 @@ const ReplieCard = ({
         <PostImage src={postImage} />
         <Actions>
           <LeftActions>
-            <CommentButton>
+            <CommentButton onClick={openModal}>
               <FaRegComment />
             </CommentButton>
+            {isModalOpen && (
+              <CommentModal
+                onClose={closeModal}
+                post={{
+                  profileImage,
+                  displayName,
+                  username,
+                  date,
+                  text,
+                  hashtag,
+                  postImage,
+                }}
+              />
+            )}
             <RetweetButton>
               <FaRetweet />
             </RetweetButton>

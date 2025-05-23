@@ -11,6 +11,11 @@ import {
 
 function CommentModal({ onClose, post }) {
   const [replyText, setReplyText] = useState("");
+  const handleInputChange = (e) => {
+    setReplyText(e.target.value);
+    e.target.style.height = "auto";
+    e.target.style.height = `${e.target.scrollHeight}px`;
+  };
   return (
     <Overlay onClick={onClose}>
       <Modal onClick={(e) => e.stopPropagation()}>
@@ -46,9 +51,9 @@ function CommentModal({ onClose, post }) {
           <Avatar2 src={post.profileImage} />
           <ReplyInput
             placeholder="Add another post"
-            rows={3}
+            rows={1}
             value={replyText}
-            onChange={(e) => setReplyText(e.target.value)}
+            onChange={handleInputChange}
           />
         </ReplyBox>
 
@@ -91,6 +96,8 @@ const Overlay = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  max-height: 100vh;
+  flex-direction: column;
 `;
 
 const Modal = styled.div`
@@ -218,9 +225,12 @@ const ReplyInput = styled.textarea`
   border: none;
   outline: none;
   resize: none;
-  margin-left: 12px;
+  margin: 11.5px 5px 0px 0px;
   font-color: gray;
   font-weight: 600;
+  overflow: hidden;
+  min-height: 50px;
+  line-height: 20px;
 `;
 
 const BottomActions = styled.div`

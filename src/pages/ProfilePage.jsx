@@ -18,9 +18,9 @@ const CenterArea = styled.main`
 
 const StickySidebarWrapper = styled.aside`
   flex: 1;
-  position: sticky;
   top: 0px;
   height: fit-content;
+  position: sticky;
 `;
 
 export default function ProfilePage() {

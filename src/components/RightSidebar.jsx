@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import ellipsisIcon from "../assets/icons/ellipsis-circle.svg";
 import searchIcon from "../assets/icons/fillMagnifying-glass.svg";
@@ -6,51 +6,67 @@ import userRecommendations from "./data/userRecommendations";
 import trendData from "./data/trendData";
 
 export default function RightSidebar() {
+  //userRepeatCount 와 trendRepeatCount 두 개의 상태를 사용해 각각 리스트의 반복 횟수를 관리
+  const [userRepeatCount, setUserRepeatCount] = useState(1);
+  const [trendRepeatCount, setTrendRepeatCount] = useState(1);
+  const handleUserShowMore = () => {
+    setUserRepeatCount((prev) => prev + 1);
+  };
+  const handleTrendShowMore = () => {
+    setTrendRepeatCount((prev) => prev + 1);
+  };
   return (
     <SidebarContainer>
-      <SearchBarWrapper>
-        <SearchInputWrapper>
-          <SearchIconImg src={searchIcon} alt="Search" />
-          <SearchInput type="text" placeholder="Search" />
-        </SearchInputWrapper>
-      </SearchBarWrapper>
-
+      <Header>
+        <SearchBarWrapper>
+          <SearchInputWrapper>
+            <SearchIconImg src={searchIcon} alt="Search" />
+            <SearchInput type="text" placeholder="Search" />
+          </SearchInputWrapper>
+        </SearchBarWrapper>
+      </Header>
       <Section>
         <SectionTitle>You might like</SectionTitle>
         <UserRecommendList>
-          {userRecommendations.map((user) => (
-            <UserRecommendItem key={user.id}>
-              <Avatar src={user.avatar} alt={user.alt} />
-              <div>
-                <UserName>{user.name}</UserName>
-                <UserHandle>{user.handle}</UserHandle>
-              </div>
-              <FollowButton>Follow</FollowButton>
-            </UserRecommendItem>
-          ))}
+          {/* //각 리스트는 Array.from({ length: count }).flatMap(...) 으로 count만큼 데이터 반복 렌더링 */}
+          {Array.from({ length: userRepeatCount }).flatMap((_, i) =>
+            userRecommendations.map((user) => (
+              // key 값에 반복 index를 추가해서 React의 key 중복 경고 방지
+              <UserRecommendItem key={`${user.id}-${i}`}>
+                <Avatar src={user.avatar} alt={user.alt} />
+                <div>
+                  <UserName>{user.name}</UserName>
+                  <UserHandle>{user.handle}</UserHandle>
+                </div>
+                <FollowButton>Follow</FollowButton>
+              </UserRecommendItem>
+            ))
+          )}
         </UserRecommendList>
-        <ShowMore>Show more</ShowMore>
+        <ShowMore onClick={handleUserShowMore}>Show more</ShowMore>
       </Section>
 
       <Section>
         <SectionTitle>What’s happening</SectionTitle>
         <TrendList>
-          {trendData.map(({ id, trendingIn, itemName, trendTweets }) => (
-            <TrendItem key={id}>
-              <ItemBox>
-                <ItemInfoWrapper>
-                  <ItemTag>
-                    <TrendingIn>{trendingIn}</TrendingIn>
-                    <Itemname>{itemName}</Itemname>
-                    <TrendTweets>{trendTweets}</TrendTweets>
-                  </ItemTag>
-                </ItemInfoWrapper>
-                <EllipsisIcon src={ellipsisIcon} />
-              </ItemBox>
-            </TrendItem>
-          ))}
+          {Array.from({ length: trendRepeatCount }).flatMap((_, i) =>
+            trendData.map(({ id, trendingIn, itemName, trendTweets }) => (
+              <TrendItem key={`${id}-${i}`}>
+                <ItemBox>
+                  <ItemInfoWrapper>
+                    <ItemTag>
+                      <TrendingIn>{trendingIn}</TrendingIn>
+                      <Itemname>{itemName}</Itemname>
+                      <TrendTweets>{trendTweets}</TrendTweets>
+                    </ItemTag>
+                  </ItemInfoWrapper>
+                  <EllipsisIcon src={ellipsisIcon} />
+                </ItemBox>
+              </TrendItem>
+            ))
+          )}
         </TrendList>
-        <ShowMore>Show more</ShowMore>
+        <ShowMore onClick={handleTrendShowMore}>Show more</ShowMore>
       </Section>
     </SidebarContainer>
   );
@@ -58,12 +74,20 @@ export default function RightSidebar() {
 
 // ======================= styled-components =========================
 
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+`;
+
 const SidebarContainer = styled.aside`
   font-family: system-ui, sans-serif;
   flex: 1;
   min-width: 350px;
   height: fit-content;
-  padding: 20px 0px;
 `;
 
 const Section = styled.section`
@@ -196,6 +220,7 @@ const EllipsisIcon = styled.img`
 
 const SearchBarWrapper = styled.div`
   padding: 12px 16px;
+  min-width: 350px;
 `;
 
 const SearchInputWrapper = styled.div`
