@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ import SettingModal from "./SettingModal";
 import TabForyou from './TabForyou';
 import TabTrending from './TabTrending';
 import TabNews from './TabNews';
+
 
 //검색박스
 const Input = styled.input.attrs(props => ({
@@ -36,7 +37,7 @@ const Tabs = [
 { id: 5, tabName: 'Entertainment', content: <TabNews /> },
 ];
 
-return <TabMenu tabs={Tabs} />;
+return <TabMenu tabs={Tabs} />; //디자인 변경가능 : underlineWidth="70%", fontWeight = "15px" fontWeight = "500" 
 };
 
 // 체크창
@@ -57,6 +58,8 @@ const InputCheck = ({ children, disabled, checked, onChange }) => {
 
 
 const SearchList = () => {
+  const typeAheadRef = useRef(null);
+  const searchBoxRef = useRef(null);
 
   //뒤로가기 버튼시 재로딩
   const navigate = useNavigate();
@@ -69,6 +72,30 @@ const SearchList = () => {
   const [isCheckedLocation, setIsCheckedLocation] = useState(true);//설정모달_체크박스
   const [isCheckedTrend, setIsCheckedTrend] = useState(true);//설정모달_체크박스
 
+  // 바깥 클릭 감지 로직
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+      typeAheadRef.current &&
+      !typeAheadRef.current.contains(event.target) &&
+      searchBoxRef.current &&
+      !searchBoxRef.current.contains(event.target)
+    ) {
+      setIsTypeAhead(false);
+    }
+    };
+
+    if (isTypeAhead) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isTypeAhead]);
+
   const handleOpen = () => setIsModalOpen(true);
   const handleClose = () => setIsModalOpen(false);
   return (
@@ -78,7 +105,7 @@ const SearchList = () => {
             {isTypeAhead && (
               <BackIcon onClick={handleBackClick} />
             )}
-          <SearchBox>
+          <SearchBox ref={searchBoxRef}>
             <img src={searchIcon} alt="검색아이콘" />
             <Input placeholder={"검색"} onClick={()=>setIsTypeAhead(true)}  />
           </SearchBox>
@@ -87,7 +114,7 @@ const SearchList = () => {
           </SettingBtn>
         </HeaderSearch>
         {isTypeAhead && (
-          <TypeAhead>
+          <TypeAhead ref={typeAheadRef}>
             <p>인물이나 리스트 또는 키워드를 검색해보세요.</p>
           </TypeAhead>
         )}

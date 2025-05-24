@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 
-const TabMenu = ({ tabs }) => {
+
+const TabMenu = ({ tabs, underlineWidth, fontSize, fontWeight }) => {
     const [activeTabId, setActiveTabId] = useState(tabs?.[0]?.id || 1);
     const activeTab = tabs.find(tab => tab.id === activeTabId);
 
@@ -15,6 +16,9 @@ const TabMenu = ({ tabs }) => {
                 tab={tab}
                 isActive={tab.id === activeTabId}
                 onClick={setActiveTabId}
+                underlineWidth={underlineWidth}
+                fontSize={fontSize}
+                fontWeight={fontWeight}
             />
             ))}
         </TabitemWrap>
@@ -25,8 +29,8 @@ const TabMenu = ({ tabs }) => {
 };
 
 // 내부 전용 Tab 컴포넌트
-const Tab = ({ tab, isActive, onClick }) => (
-    <Tabitem className={isActive ? 'on' : ''}>
+const Tab = ({ tab, isActive, onClick, underlineWidth, fontSize, fontWeight }) => (
+    <Tabitem className={isActive ? 'on' : ''} $underlineWidth={underlineWidth}>
     <a
         href="#"
         onClick={(e) => {
@@ -34,7 +38,7 @@ const Tab = ({ tab, isActive, onClick }) => (
         onClick(tab.id);
         }}
     >
-        <TabTit>{tab.tabName}</TabTit>
+        <TabTit $fontSize={fontSize} $fontWeight={fontWeight}>{tab.tabName}</TabTit>
     </a>
     </Tabitem>
 );
@@ -56,8 +60,6 @@ const Tabitem = styled.li`
     background: none;
     background-color: rgba(255,255,255,0.8);
     border: none;
-    font-weight: bold;
-    font-size: 16px;
     text-align : center;
     border-width: 10px;
     color: black;
@@ -76,7 +78,7 @@ const Tabitem = styled.li`
         left:50%;
         bottom:0;
         transform: translateX(-50%);
-        width:70%;
+        width: ${({ $underlineWidth }) => $underlineWidth || '70%'};
         height:3px;
         background-color:#2ab9fc;
         }
@@ -94,4 +96,6 @@ const ContentBox = styled.div``;
 
 const TabTit = styled.span`
     color: gray;
+    font-size: ${({ $fontSize }) => $fontSize || '16px'};
+    font-weight: ${({ $fontWeight }) => $fontWeight || 'bold'};
 `;

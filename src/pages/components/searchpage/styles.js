@@ -62,12 +62,17 @@ const Test = styled.div`
 
 
 // trenditem
+const TrendBox = styled.ul``;
 const Trenditem = styled.li`
-  display:flex;
-  justify-content: space-between;
+  position:relative;
   padding:12px 16px;
+  list-style:none;
   &:hover{
     background-color: rgba(0,0,0,0.02);
+  }
+  div {
+    display:flex;
+    justify-content: space-between;
   }
 `;
 const StyledLink = styled(Link)`
@@ -192,12 +197,38 @@ const ViewAll = styled.div`
     //outline:1px solid red;
   }
 `;
+//모달 레이아웃 
+const ModalList = styled.li`
+  width:100%;
+  list-style:none;
+  padding:12px 16px;
+  &:hover{
+    background-color: rgba(0,0,0,0.04);
+  }
+`;
+const ModalItem = styled(Link)`
+  width:100%;
+  display:block;
+`;
+const MessageBox = styled.div`
+  width:100%;
+  padding:10px;
+  border-bottom: 1px solid rgb(239, 243, 244);
+  p {
+  padding:15px 20px;
+  background-color: rgba(247, 249, 249, 1.00);
+  border-radius: 12px;
+  }
+`;
+
+
 
 export {
   Cont,
   ImgBox,
   ImgTxt,
   Test,
+  TrendBox,
   Trenditem,
   StyledLink,
   MoreBtn,
@@ -211,5 +242,8 @@ export {
   FollowButton,
   FollowingButton,
   ViewAll,
-  ImgBtn
+  ImgBtn,
+  ModalList,
+  ModalItem,
+  MessageBox
 };
