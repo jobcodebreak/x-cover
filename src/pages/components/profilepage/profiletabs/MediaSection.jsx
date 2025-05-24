@@ -45,8 +45,6 @@ export default MediaSection;
 const Container = styled.div`
   font-family: system-ui, sans-serif;
   min-width: 600px;
-  border-left: 1px solid rgba(0, 0, 0, 0.05);
-  border-right: 1px solid rgba(0, 0, 0, 0.05);
 `;
 
 const ImgSection = styled.div`

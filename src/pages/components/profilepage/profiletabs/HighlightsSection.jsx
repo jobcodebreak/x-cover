@@ -20,8 +20,6 @@ export default HighlightsSection;
 const Container = styled.div`
   font-family: system-ui, sans-serif;
   min-width: 600px;
-  border-left: 1px solid rgba(0, 0, 0, 0.05);
-  border-right: 1px solid rgba(0, 0, 0, 0.05);
 `;
 
 const Highlight = styled.div`
@@ -30,7 +28,7 @@ const Highlight = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  margin: 0 auto;
   padding: 16px;
   background-color: white;
 `;
