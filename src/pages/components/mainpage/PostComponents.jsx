@@ -4,6 +4,9 @@ import photoIcon from "../../../assets/icons/photo.svg";
 import locationIcon from "../../../assets/icons/location.svg";
 import smileIcon from "../../../assets/icons/smile.svg";
 import fireIcon from "../../../assets/icons/fire.svg";
+import { selectUserProfile } from "../../../slices/userProfileSlice";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 const PostWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -63,12 +66,15 @@ const PostBtn = styled.button`
 `;
 
 function PostComponents({ type = "post" }) {
+  const UP = useSelector(selectUserProfile);
   const isReply = type === "reply";
   return (
     <>
       <PostWrapper isReply={isReply}>
         <PostWrite>
-          <UserImg src="https://mblogthumb-phinf.pstatic.net/MjAyNTAxMjJfMTg4/MDAxNzM3NTQ1NzY1MDc0.Pgcv6JXSxrh1KHXVB2c2X5rJ8FHDrsvsQ5-35AWa0asg.urpL4d0Xau_DkMR-UDeFJT09h0whunwWcezTf9wawu0g.JPEG/image.JPEG?type=w800" />
+          <Link to="/profile">
+            <UserImg src={UP.avatar} />
+          </Link>
           <WriteInput isReply={isReply} />
         </PostWrite>
         <IconsWrite>
