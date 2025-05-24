@@ -8,6 +8,8 @@ const PostWrapper = styled.div`
   display: flex;
   flex-direction: column;
   border-bottom: ${(props) => (props.isReply ? "none" : "1px solid #ddd")};
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #ddd;
   padding: ${(props) => (props.isReply ? "20px" : "none")};
 `;
 const PostWrite = styled.div`

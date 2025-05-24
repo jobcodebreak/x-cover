@@ -5,6 +5,8 @@ export const PostWrapper = styled.div`
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #ddd;
   &:hover {
     background-color: whitesmoke;
   }

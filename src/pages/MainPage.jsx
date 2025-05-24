@@ -10,24 +10,27 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   gap: 20px;
+  /* overflow-y: auto; */
 `;
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   font-family: system-ui, sans-serif;
   width: 600px;
-  height: 100vh;
-  overflow-y: auto;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
-  border-left: 1px solid rgba(0, 0, 0, 0.1);
-  &::-webkit-scrollbar {
+  /* height: 100vh; */
+  /* overflow-y: auto; */
+  /* border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 1px solid rgba(0, 0, 0, 0.1); */
+  /* &::-webkit-scrollbar {
     display: none;
-  }
+  } */
 `;
 
 const TabWrapper = styled.div`
   display: flex;
   border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #ddd;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -40,6 +43,8 @@ const ShowPostWrapper = styled.div`
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #ddd;
   cursor: pointer;
   &:hover {
     background-color: whitesmoke;
@@ -96,8 +101,6 @@ function MainPage() {
             <ShowPostWrapper>
               <span>Show 140 posts</span>
             </ShowPostWrapper>
-            <Items />
-            <Items />
             <Items />
           </>
         )}
