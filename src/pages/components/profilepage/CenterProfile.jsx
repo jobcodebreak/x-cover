@@ -8,7 +8,7 @@ import React, { useState, useEffect } from "react";
 import ReplieCard from "./ReplieCard";
 import EditProfileModal from "./EditProfileModal";
 import { useNavigate } from "react-router-dom";
-import Carousel from "./Carousel";
+import Carousel from "../../../hooks/Carousel";
 import { useSelector } from "react-redux";
 import { selectUserRecommendations } from "../../../slices/userRecommendationsSlice";
 // import { selectUserProfile } from "../../../slices/userProfileSlice";
