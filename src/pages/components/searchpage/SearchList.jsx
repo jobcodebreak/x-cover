@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaSearch} from "react-icons/fa";
 import { FiSettings } from "react-icons/fi";
 import searchIcon from "../../../assets/icons/fillMagnifying-glass.svg";
-import TabMenu from "./TabMenu";
+// 연결페이지
+import TabMenu from "../../../components/TabMenu";
 import SettingModal from "./SettingModal";
-import { Link } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+import TabForyou from './TabForyou';
+import TabTrending from './TabTrending';
+import TabNews from './TabNews';
 
-
+//검색박스
 const Input = styled.input.attrs(props => ({
   type: "search",
   size: props.size || "460px",
@@ -22,6 +26,20 @@ const Input = styled.input.attrs(props => ({
     }
 `;
 
+// 탭 메뉴 컨텐츠
+const SearchTabMenu = () => {
+const Tabs = [
+{ id: 1, tabName: 'For You', content: <TabForyou /> },
+{ id: 2, tabName: 'Trending', content: <TabTrending /> },
+{ id: 3, tabName: 'News', content: <TabNews /> },
+{ id: 4, tabName: 'Sports', content: <TabNews /> },
+{ id: 5, tabName: 'Entertainment', content: <TabNews /> },
+];
+
+return <TabMenu tabs={Tabs} />;
+};
+
+// 체크창
 const InputCheck = ({ children, disabled, checked, onChange }) => {
   return (
     <label>
@@ -40,16 +58,16 @@ const InputCheck = ({ children, disabled, checked, onChange }) => {
 
 const SearchList = () => {
 
-  //==============================useNavigate사용 백 아이콘 클릭 시 홈으로
+  //뒤로가기 버튼시 재로딩
   const navigate = useNavigate();
   const handleBackClick = () => {
     navigate(0);
   };
 
-  const [isTypeAhead, setIsTypeAhead] = useState(false);
-  const [isModalOpen,setIsModalOpen] = useState(false);
-  const [isCheckedLocation, setIsCheckedLocation] = useState(true);
-  const [isCheckedTrend, setIsCheckedTrend] = useState(true);
+  const [isTypeAhead, setIsTypeAhead] = useState(false); //검색창리스트
+  const [isModalOpen,setIsModalOpen] = useState(false); //모달창
+  const [isCheckedLocation, setIsCheckedLocation] = useState(true);//설정모달_체크박스
+  const [isCheckedTrend, setIsCheckedTrend] = useState(true);//설정모달_체크박스
 
   const handleOpen = () => setIsModalOpen(true);
   const handleClose = () => setIsModalOpen(false);
@@ -74,7 +92,7 @@ const SearchList = () => {
           </TypeAhead>
         )}
       </Header>
-      <TabMenu/>
+      <SearchTabMenu />
 
       {/* Modal */}
       {isModalOpen && (
@@ -136,9 +154,7 @@ const Header = styled.div`
  // border-bottom: 1px solid #ddd;
   z-index: 999;
 `;
-const HeaderSearchWrap = styled.div`
-
-`;
+const HeaderSearchWrap = styled.div``;
 
 const TypeAhead = styled.div`
   position: absolute;
@@ -217,9 +233,7 @@ const SettingBtn = styled(Link)`
 `;
 
 
-const ContentWrap = styled.div`
-  
-`;
+const ContentWrap = styled.div``;
 const ConListWrap = styled.div`
   padding: 20px;
   border-bottom:1px solid #ddd;
