@@ -93,6 +93,8 @@ const SidebarContainer = styled.aside`
   flex: 1;
   min-width: 350px;
   height: fit-content;
+  position: sticky; //무한스크롤때문에 고정
+  top: 0; //무한스크롤때문에 고정
 `;
 
 const Section = styled.section`
