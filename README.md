@@ -35,7 +35,13 @@ src/-
   |
   *--- dev
         |
-        *--- layout *--- mainpage
+        *--- layout
+        |       |
+        |       *--- mainpage
+        |       |
+        |       *--- searchpage
+        |       |
+        |       *--- searchpage
         *---  feature
                |
                *--- modal
@@ -77,6 +83,10 @@ src/-
 - styled-components(6.1.18) : css-in-js
 - createGlobalStyle (styled-components(6.1.18)) : CSS reset
 - react-icons(5.5.0) : Icons
+- react-slick(0.30.3),slick-carousel(1.8.1),framer-motion(12.12.1) : carousel
+- react-redux(9.2.0) : react redux
+- reduxjs/toolkit(2.8.2) : redux toolkit
+- react-infinite-scroll-component(6.1.0): Infinite-scroll,
 
 ## 📦 배포
 
