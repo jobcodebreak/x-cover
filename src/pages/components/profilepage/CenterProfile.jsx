@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import Carousel from "./Carousel";
 import { useSelector } from "react-redux";
 import { selectUserRecommendations } from "../../../slices/userRecommendationsSlice";
-import { selectUserProfile } from "../../../slices/userProfileSlice";
+// import { selectUserProfile } from "../../../slices/userProfileSlice";
 import { selectPosts } from "../../../slices/postsSlice";
 import { selectReplies } from "../../../slices/repliesSlice";
 
@@ -49,10 +49,12 @@ const ProfilePage = () => {
     setUserRepeatCount((prev) => prev + 1);
   };
   //==============================useSelector사용해 상태 가져오기
-  const UP = useSelector(selectUserProfile);
+  // const UP = useSelector(selectUserProfile);
   const UR = useSelector(selectUserRecommendations);
   const Po = useSelector(selectPosts);
   const Re = useSelector(selectReplies);
+  //=============================store에서 상태 바로 가져옴
+  const UP = useSelector((state) => state.userProfile);
   //============================== 모달 열릴 때 스크롤 막기
   useEffect(() => {
     if (isModalOpen) {
