@@ -1,4 +1,6 @@
-const posts = [
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = [
   {
     profileImage:
       "https://mblogthumb-phinf.pstatic.net/MjAyNTAxMjJfMTg4/MDAxNzM3NTQ1NzY1MDc0.Pgcv6JXSxrh1KHXVB2c2X5rJ8FHDrsvsQ5-35AWa0asg.urpL4d0Xau_DkMR-UDeFJT09h0whunwWcezTf9wawu0g.JPEG/image.JPEG?type=w800",
@@ -23,4 +25,12 @@ const posts = [
   },
 ];
 
-export default posts;
+const postsSlice = createSlice({
+  name: "posts",
+  initialState,
+  reducers: {},
+});
+
+export const selectPosts = (state) => state.posts;
+
+export default postsSlice.reducer;

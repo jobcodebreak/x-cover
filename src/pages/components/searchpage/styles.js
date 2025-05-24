@@ -7,7 +7,7 @@ const TabBox = styled.div`
   border-bottom: 1px solid #eee ;
   position:sticky;
   top:55px;
-  z-index: 999;
+  z-index: 99;
 `;
 const TabitemWrap = styled.ul`
   display:flex;

@@ -91,7 +91,8 @@ const PostCard = ({
 
 export default PostCard;
 
-// ======================= styled-components =========================
+//==============================styled-components
+
 const CardContainer = styled.div`
   max-width: 600px;
   display: flex;

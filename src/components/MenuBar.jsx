@@ -91,6 +91,7 @@ const UserBox = styled.div`
   cursor: pointer;
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const UserInfoWrapper = styled.div`

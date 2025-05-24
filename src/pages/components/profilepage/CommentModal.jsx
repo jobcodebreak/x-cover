@@ -85,7 +85,7 @@ function CommentModal({ onClose, post }) {
 
 export default CommentModal;
 
-// ======================= 스타일 ========================
+//==============================styled-components
 
 const Overlay = styled.div`
   cursor: default;

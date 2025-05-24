@@ -22,7 +22,7 @@ const ProfileTabs = ({ activeTab, setActiveTab }) => {
 
 export default ProfileTabs;
 
-// ======================= styled-components =========================
+//==============================styled-components
 
 const TabsContainer = styled.div`
   display: flex;

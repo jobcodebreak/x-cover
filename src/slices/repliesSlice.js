@@ -1,4 +1,6 @@
-const replies = [
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = [
   {
     id: 1,
     profileImage:
@@ -13,4 +15,12 @@ const replies = [
   },
 ];
 
-export default replies;
+const repliesSlice = createSlice({
+  name: "replies",
+  initialState,
+  reducers: {},
+});
+
+export const selectReplies = (state) => state.replies;
+
+export default repliesSlice.reducer;

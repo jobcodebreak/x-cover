@@ -104,6 +104,8 @@ function EditProfileModal({ onClose }) {
 
 export default EditProfileModal;
 
+//==============================styled-components
+
 const Overlay = styled.div`
   position: fixed;
   inset: 0;
