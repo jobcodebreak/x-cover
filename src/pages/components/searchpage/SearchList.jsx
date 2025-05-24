@@ -6,6 +6,7 @@ import searchIcon from "../../../assets/icons/fillMagnifying-glass.svg";
 import TabMenu from "./TabMenu";
 import SettingModal from "./SettingModal";
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 
 const Input = styled.input.attrs(props => ({
@@ -36,7 +37,16 @@ const InputCheck = ({ children, disabled, checked, onChange }) => {
   );
 };
 
+
 const SearchList = () => {
+
+  //==============================useNavigate사용 백 아이콘 클릭 시 홈으로
+  const navigate = useNavigate();
+  const handleBackClick = () => {
+    navigate(0);
+  };
+
+  const [isTypeAhead, setIsTypeAhead] = useState(false);
   const [isModalOpen,setIsModalOpen] = useState(false);
   const [isCheckedLocation, setIsCheckedLocation] = useState(true);
   const [isCheckedTrend, setIsCheckedTrend] = useState(true);
@@ -47,18 +57,26 @@ const SearchList = () => {
     <Container>
       <Header>
         <HeaderSearch>
+            {isTypeAhead && (
+              <BackIcon onClick={handleBackClick} />
+            )}
           <SearchBox>
             <img src={searchIcon} alt="검색아이콘" />
-            <Input placeholder={"검색"}  />
+            <Input placeholder={"검색"} onClick={()=>setIsTypeAhead(true)}  />
           </SearchBox>
           <SettingBtn to="#" onClick={handleOpen}>
               <FiSettings alt="설정아이콘" size={18} />
           </SettingBtn>
         </HeaderSearch>
+        {isTypeAhead && (
+          <TypeAhead>
+            <p>인물이나 리스트 또는 키워드를 검색해보세요.</p>
+          </TypeAhead>
+        )}
       </Header>
       <TabMenu/>
+
       {/* Modal */}
-      
       {isModalOpen && (
         <SettingModal handleClose={handleClose}>
           <div>
@@ -94,6 +112,7 @@ const SearchList = () => {
       )}
       
     </Container>
+
   );
 };
 
@@ -117,13 +136,48 @@ const Header = styled.div`
  // border-bottom: 1px solid #ddd;
   z-index: 999;
 `;
+const HeaderSearchWrap = styled.div`
 
+`;
+
+const TypeAhead = styled.div`
+  position: absolute;
+  top: 55px; 
+  left: 60px;
+  width: 500px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  border-top: none;
+  z-index: 99999; 
+  padding: 20px 12px 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align:center;
+  p {
+    font-size:15px;
+    color:#536471;
+  }
+    
+`;
 
 const HeaderSearch = styled.div`
     display: flex;
     justify-content: space-between; 
     align-items: center;
     padding:10px;
+`;
+
+const BackIcon = styled(FaArrowLeft)`
+  width: 35px;
+  height: 35px;
+  padding: 10px;
+  margin-right: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const SearchBox = styled.div`
