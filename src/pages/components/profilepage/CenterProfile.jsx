@@ -7,7 +7,7 @@ import EditProfileModal from "./EditProfileModal";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUserProfile } from "../../../slices/userProfileSlice";
-import TabsSection from "./TabsSection";
+import TabsSection from "./ProfileTabs/TabsSection";
 
 const ProfilePage = () => {
   //==============================Edit profile 모달
