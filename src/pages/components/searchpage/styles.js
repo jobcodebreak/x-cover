@@ -1,6 +1,62 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+//tabmenu
+const TabBox = styled.div`
+  // outline: 1px solid red;
+  border-bottom: 1px solid #eee ;
+  position:sticky;
+  top:55px;
+  z-index: 99;
+`;
+const TabitemWrap = styled.ul`
+  display:flex;
+  justify-content: space-between;
+`;
+const Tabitem = styled.li`
+  flex: 1;
+  background: none;
+  background-color: rgba(255,255,255,0.8);
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+  text-align : center;
+  border-width: 10px;
+  color: black;
+  transition: border-color 0.2s ease;
+  margin-top:5px;
+  &.on{
+    position: relative;
+    a {
+      span {
+        color:black;
+      }
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      left:50%;
+      bottom:0;
+      transform: translateX(-50%);
+      width:70%;
+      height:3px;
+      background-color:#2ab9fc;
+    }
+  }
+  &:hover {
+    background-color: #f7f7f7;
+  }
+  a{
+    width:100%; 
+    display:block;
+    padding:16px;
+  }
+`;
+const ContentBox = styled.div``;
+
+const TabTit = styled.span`
+  color: gray;
+`;
 
 // TabContent_Tabforyou
 const Cont = styled.div`
@@ -194,6 +250,11 @@ const ViewAll = styled.div`
 `;
 
 export {
+  TabBox,
+  TabitemWrap,
+  Tabitem,
+  ContentBox,
+  TabTit,
   Cont,
   ImgBox,
   ImgTxt,
