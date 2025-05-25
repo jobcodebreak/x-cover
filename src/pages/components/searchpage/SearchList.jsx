@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FaArrowLeft, FaSearch} from "react-icons/fa";
 import { FiSettings } from "react-icons/fi";
 import searchIcon from "../../../assets/icons/fillMagnifying-glass.svg";
-import TabMenu from "./TabMenu";
+import SearchTab from "./SearchTab";
 import SettingModal from "./SettingModal";
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
@@ -33,7 +33,7 @@ const Tabs = [
 { id: 5, tabName: 'Entertainment', content: <TabNews /> },
 ];
 
-return <TabMenu tabs={Tabs} />; //디자인 변경가능 : underlineWidth="70%", fontWeight = "15px" fontWeight = "500" 
+return <SearchTab tabs={Tabs} />; //디자인 변경가능 : underlineWidth="70%", fontWeight = "15px" fontWeight = "500" 
 };
 
 // 체크창
@@ -115,7 +115,7 @@ const SearchList = () => {
           </TypeAhead>
         )}
       </Header>
-      <TabMenu/>
+      <SearchTab/>
 
       {/* Modal */}
       {isModalOpen && (

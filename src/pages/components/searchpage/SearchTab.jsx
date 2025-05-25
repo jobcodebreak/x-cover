@@ -6,7 +6,7 @@ import TabTrending from './TabTrending';
 import TabNews from './TabNews';
 
 
-const TabMenu = () => {
+const SearchTab = () => {
   const [activeTabId, setActiveTabId] = useState(1);
 
   const tabs = [
@@ -44,4 +44,4 @@ const TabMenu = () => {
   );
 };
 
-export default TabMenu;
+export default SearchTab;
