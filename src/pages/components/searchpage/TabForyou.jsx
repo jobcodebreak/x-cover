@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Cont, ImgBox, ImgTxt, ImgBtn, Contit } from './styles';
+import { Cont, ImgBox, ImgTxt, ImgBtn, Contit, ModalList, ModalItem, MessageBox } from './styles';
 import TrendItem from './TrendItem';
 import WhoToFollow from './WhoToFollow';
 import BannerModal from './BannerModal';
 import Items from '../mainpage/Items';
 import moreIcon from '../../../assets/icons/more.svg';
 import { Link } from 'react-router-dom';
-import styled from "styled-components";
 
 const TabForyou = () => {
   const trendItems = [
@@ -25,10 +24,9 @@ const TabForyou = () => {
   const handleClose = () => setModalOpen(false);
 
   const handleModalClick = () => {
-    setImgBoxVisible(false);  // ImgBox를 숨기고
-    setMessageVisible(true);  // 문구 표시
+    setImgBoxVisible(false);
+    setMessageVisible(true);
   };
-
 
   return (
     <Cont>
@@ -48,9 +46,9 @@ const TabForyou = () => {
           </ImgBtn>
           {/* 모달 표시 */}
           {isModalOpen && (
-            <BannerModal handleClose={handleClose} handleModalClick={handleModalClick}>
+            <BannerModal handleClose={handleClose}>
               <ModalList>
-                <ModalItem to="#">Don’t want to see this ad</ModalItem>
+                <ModalItem to="#" onClick={() => { handleModalClick(); handleClose(); }}>Don’t want to see this ad</ModalItem>
               </ModalList>
             </BannerModal>
           )}
@@ -64,11 +62,11 @@ const TabForyou = () => {
         </MessageBox>
       )}
 
-      <ul>
+      <trendBox>
         {trendItems.map((item, index) => (
           <TrendItem key={index} {...item} />
         ))}
-      </ul>
+      </trendBox>
       <WhoToFollow />
       <Contit>recommended post</Contit>
       <Items />
@@ -77,25 +75,3 @@ const TabForyou = () => {
 };
 
 export default TabForyou;
-
-
-//모달 레이아웃 
-const ModalList = styled.li`
-  width:100%;
-  list-style:none;
-`;
-const ModalItem = styled(Link)`
-  width:100%;
-  display:block;
-`;
-const MessageBox = styled.div`
-  width:100%;
-  padding:10px;
-  border-bottom: 1px solid rgb(239, 243, 244);
-  p {
-  padding:15px 20px;
-  background-color: rgba(247, 249, 249, 1.00);
-  border-radius: 12px;
-  }
-`;
-

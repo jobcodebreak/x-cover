@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from "styled-components";
 import { FaArrowLeft, FaSearch} from "react-icons/fa";
 import { FiSettings } from "react-icons/fi";
 import searchIcon from "../../../assets/icons/fillMagnifying-glass.svg";
-import TabMenu from "./TabMenu";
+import SearchTab from "./SearchTab";
 import SettingModal from "./SettingModal";
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+
 
 
 const Input = styled.input.attrs(props => ({
@@ -22,6 +23,20 @@ const Input = styled.input.attrs(props => ({
     }
 `;
 
+// 탭 메뉴 컨텐츠
+const SearchTabMenu = () => {
+const Tabs = [
+{ id: 1, tabName: 'For You', content: <TabForyou /> },
+{ id: 2, tabName: 'Trending', content: <TabTrending /> },
+{ id: 3, tabName: 'News', content: <TabNews /> },
+{ id: 4, tabName: 'Sports', content: <TabNews /> },
+{ id: 5, tabName: 'Entertainment', content: <TabNews /> },
+];
+
+return <SearchTab tabs={Tabs} />; //디자인 변경가능 : underlineWidth="70%", fontWeight = "15px" fontWeight = "500" 
+};
+
+// 체크창
 const InputCheck = ({ children, disabled, checked, onChange }) => {
   return (
     <label>
@@ -39,6 +54,8 @@ const InputCheck = ({ children, disabled, checked, onChange }) => {
 
 
 const SearchList = () => {
+  const typeAheadRef = useRef(null);
+  const searchBoxRef = useRef(null);
 
   //==============================useNavigate사용 백 아이콘 클릭 시 홈으로
   const navigate = useNavigate();
@@ -46,10 +63,34 @@ const SearchList = () => {
     navigate(0);
   };
 
-  const [isTypeAhead, setIsTypeAhead] = useState(false);
-  const [isModalOpen,setIsModalOpen] = useState(false);
-  const [isCheckedLocation, setIsCheckedLocation] = useState(true);
-  const [isCheckedTrend, setIsCheckedTrend] = useState(true);
+  const [isTypeAhead, setIsTypeAhead] = useState(false); //검색창리스트
+  const [isModalOpen,setIsModalOpen] = useState(false); //모달창
+  const [isCheckedLocation, setIsCheckedLocation] = useState(true);//설정모달_체크박스
+  const [isCheckedTrend, setIsCheckedTrend] = useState(true);//설정모달_체크박스
+
+  // 바깥 클릭 감지 로직
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+      typeAheadRef.current &&
+      !typeAheadRef.current.contains(event.target) &&
+      searchBoxRef.current &&
+      !searchBoxRef.current.contains(event.target)
+    ) {
+      setIsTypeAhead(false);
+    }
+    };
+
+    if (isTypeAhead) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isTypeAhead]);
 
   const handleOpen = () => setIsModalOpen(true);
   const handleClose = () => setIsModalOpen(false);
@@ -60,7 +101,7 @@ const SearchList = () => {
             {isTypeAhead && (
               <BackIcon onClick={handleBackClick} />
             )}
-          <SearchBox>
+          <SearchBox ref={searchBoxRef}>
             <img src={searchIcon} alt="검색아이콘" />
             <Input placeholder={"검색"} onClick={()=>setIsTypeAhead(true)}  />
           </SearchBox>
@@ -69,12 +110,12 @@ const SearchList = () => {
           </SettingBtn>
         </HeaderSearch>
         {isTypeAhead && (
-          <TypeAhead>
+          <TypeAhead ref={typeAheadRef}>
             <p>인물이나 리스트 또는 키워드를 검색해보세요.</p>
           </TypeAhead>
         )}
       </Header>
-      <TabMenu/>
+      <SearchTab/>
 
       {/* Modal */}
       {isModalOpen && (

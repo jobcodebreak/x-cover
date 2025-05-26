@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Carousel from "../profilepage/Carousel";
+import Carousel from "../../../hooks/Carousel";
 import { ItemsImgWrapper, ItemsImg } from "./styles";
 
 function ItemImages({ images }) {
