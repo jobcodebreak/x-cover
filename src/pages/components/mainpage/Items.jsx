@@ -27,8 +27,7 @@ function Items() {
       ],
     },
     {
-      userImg:
-        "https://i.namu.wiki/i/cmDI70T4ElYmbvqhMauKsmFl5FdhE-5Cg0xl15leKlILTfrb4qhjGRLopJ3aXKpRAKUTGH-uluOhUpUEagSmPPLR-Cf0GnucY3Kieo3hEmZpftmuWdvCudt23GVuzx5qt0LaBW1Fkl-VDGAVeJlw3Q.webp",
+      userImg: "/shin_saimdang.jpg",
       userName: "@shin_saimdangㆍMay 18",
       tag: "#율곡이이어머니 #신사임당 #현모양처 #조선여성 #여성화가",
       comment: "바른 마음은 모든 행동의 근본이 된다.",
