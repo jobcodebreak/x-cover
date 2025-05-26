@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUserProfile } from "../../../slices/userProfileSlice";
 import TabsSection from "../profilepage/profiletabs/ProfileTabs";
+import PostsSection from "./profiletabs/PostsSection";
 
 const ProfilePage = () => {
   //==============================Edit profile 모달
@@ -75,6 +76,7 @@ const ProfilePage = () => {
         </FollowStats>
       </ProfileContent>
       <TabsSection />
+      <PostsSection />
     </Container>
   );
 };
