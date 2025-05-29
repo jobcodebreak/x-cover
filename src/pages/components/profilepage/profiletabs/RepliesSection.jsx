@@ -8,19 +8,22 @@ import { selectPosts } from "../../../../slices/postsSlice";
 import { selectReplies } from "../../../../slices/repliesSlice";
 
 const RepliesSection = () => {
-  //==============================반복 횟수 상태 추가
+  //반복 횟수 상태 추가
   const [userRepeatCount, setUserRepeatCount] = useState(1);
-  //==============================Show more 클릭 시 반복 수 증가
+
+  //Show more 클릭 시 반복 수 증가
   const handleShowMore = () => {
     setUserRepeatCount((prev) => prev + 1);
   };
-  //==============================useSelector사용해 상태 가져오기
-  const UR = useSelector(selectUserRecommendations);
-  const Po = useSelector(selectPosts);
-  const Re = useSelector(selectReplies);
+
+  //useSelector사용해 상태 가져오기
+  const userRecommendation = useSelector(selectUserRecommendations);
+  const post = useSelector(selectPosts);
+  const replies = useSelector(selectReplies);
+
   return (
     <Container>
-      {Re.map((reply) => (
+      {replies.map((reply) => (
         <ReplieCard
           key={reply.id}
           profileImage={reply.profileImage}
@@ -33,7 +36,7 @@ const RepliesSection = () => {
           postImage={reply.postImage}
         />
       ))}
-      {Po.map((post, index) => (
+      {post.map((post, index) => (
         <PostCard
           key={index}
           profileImage={post.profileImage}
@@ -49,7 +52,7 @@ const RepliesSection = () => {
         <SectionTitle>Who to follow</SectionTitle>
         <UserRecommendList>
           {Array.from({ length: userRepeatCount }).flatMap((_, i) =>
-            UR.map((user) => (
+            userRecommendation.map((user) => (
               <UserRecommendItem key={`${user.id}-${i}`}>
                 <SectionAvatar src={user.avatar} alt={user.name} />
                 <div>
