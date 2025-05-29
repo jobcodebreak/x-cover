@@ -10,6 +10,7 @@ export default function RightSidebar() {
   //userRepeatCount 와 trendRepeatCount 두 개의 상태를 사용해 각각 리스트의 반복 횟수를 관리
   const [userRepeatCount, setUserRepeatCount] = useState(1);
   const [trendRepeatCount, setTrendRepeatCount] = useState(1);
+
   const handleUserShowMore = () => {
     setUserRepeatCount((prev) => prev + 1);
   };
@@ -17,8 +18,8 @@ export default function RightSidebar() {
     setTrendRepeatCount((prev) => prev + 1);
   };
 
-  const SR = useSelector(selectSidebarRecs);
-  const Tr = useSelector(selectTrends);
+  const sidebarRecs = useSelector(selectSidebarRecs);
+  const trends = useSelector(selectTrends);
 
   return (
     <SidebarContainer>
@@ -35,7 +36,7 @@ export default function RightSidebar() {
         <UserRecommendList>
           {/* //각 리스트는 Array.from({ length: count }).flatMap(...) 으로 count만큼 데이터 반복 렌더링 */}
           {Array.from({ length: userRepeatCount }).flatMap((_, i) =>
-            SR.map((user) => (
+            sidebarRecs.map((user) => (
               // key 값에 반복 index를 추가해서 React의 key 중복 경고 방지
               <UserRecommendItem key={`${user.id}-${i}`}>
                 <Avatar src={user.avatar} alt={user.alt} />
@@ -55,7 +56,7 @@ export default function RightSidebar() {
         <SectionTitle>What’s happening</SectionTitle>
         <TrendList>
           {Array.from({ length: trendRepeatCount }).flatMap((_, i) =>
-            Tr.map(({ id, trendingIn, itemName, trendTweets }) => (
+            trends.map(({ id, trendingIn, itemName, trendTweets }) => (
               <TrendItem key={`${id}-${i}`}>
                 <ItemBox>
                   <ItemInfoWrapper>

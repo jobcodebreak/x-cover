@@ -1,37 +1,42 @@
 // 사용자의 프로필 정보, 탭 메뉴 (Posts, Replies, Media 등), 팔로우 추천, 모달 창, 캐러셀(이미지 뷰어) 등을 포함한 SNS 스타일 프로필 페이지
-
-import styled from "styled-components";
-import { FaArrowLeft, FaCalendarAlt } from "react-icons/fa";
 import React, { useState, useEffect } from "react";
-import EditProfileModal from "./EditProfileModal";
+import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import EditProfileModal from "./EditProfileModal";
 import { selectUserProfile } from "../../../slices/userProfileSlice";
 import TabsSection from "./profiletabs/TabsSection";
+import { FaArrowLeft, FaCalendarAlt } from "react-icons/fa";
 
-const ProfilePage = () => {
-  //==============================Edit profile 모달
+const CenterProfile = () => {
+  //Edit profile 모달
   const [isModalOpen, setIsModalOpen] = useState(false);
-  //==============================프로필 수정 모달
+
+  //프로필 수정 모달
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-  //==============================useNavigate사용 백 아이콘 클릭 시 홈으로
+
+  //useNavigate사용 백 아이콘 클릭 시 홈으로
   const navigate = useNavigate();
   const handleBackClick = () => {
     navigate("/");
   };
-  //==============================useSelector사용해 상태 가져오기
-  const UP = useSelector(selectUserProfile);
-  //=============================store에서 상태 바로 가져옴
+
+  //useSelector사용해 상태 가져오기
+  const userProfile = useSelector(selectUserProfile);
+
+  //store에서 상태 바로 가져오는 로직
   // const UP = useSelector((state) => state.userProfile);
-  //============================== 모달 열릴 때 스크롤 막기
+
+  // 모달 열릴 때 스크롤 막기
   useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
-    //============================== 컴포넌트 unmount 시 스크롤 원복
+
+    // 컴포넌트 unmount 시 스크롤 원복
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -43,34 +48,36 @@ const ProfilePage = () => {
       <Header>
         <BackIcon onClick={handleBackClick} />
         <HeaderInfo>
-          <Name>{UP.name}</Name>
-          <Tweets>{UP.postsCount} posts</Tweets>
+          <Name>{userProfile.name}</Name>
+          <Tweets>{userProfile.postsCount} posts</Tweets>
         </HeaderInfo>
       </Header>
+
       {/* ===== 프로필 ===== */}
       <Banner />
       <EditProfile>
         <EditButton onClick={openModal}>Edit profile</EditButton>
       </EditProfile>
       {isModalOpen && <EditProfileModal onClose={closeModal} />}
-      <Avatar src={UP.avatar} />
+      <Avatar src={userProfile.avatar} />
+
       {/* ===== 유저 정보 ===== */}
       <ProfileContent>
         <NameTag>
-          <DisplayName>{UP.name}</DisplayName>
-          <Username>{UP.username}</Username>
+          <DisplayName>{userProfile.name}</DisplayName>
+          <Username>{userProfile.username}</Username>
         </NameTag>
-        <Bio>{UP.bio}</Bio>
+        <Bio>{userProfile.bio}</Bio>
         <Joined>
           <FaCalendarAlt size={14} style={{ marginRight: "4px" }} />
-          Joined {UP.joinedDate}
+          Joined {userProfile.joinedDate}
         </Joined>
         <FollowStats>
           <span>
-            <strong>{UP.followingCount}</strong> Following
+            <strong>{userProfile.followingCount}</strong> Following
           </span>
           <span>
-            <strong>{UP.followersCount}</strong> Followers
+            <strong>{userProfile.followersCount}</strong> Followers
           </span>
         </FollowStats>
       </ProfileContent>
@@ -79,7 +86,7 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default CenterProfile;
 
 //==============================styled-components
 

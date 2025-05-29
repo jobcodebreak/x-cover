@@ -9,8 +9,9 @@ import MediaSection from "./MediaSection";
 import LikesSection from "./LikesSection";
 
 const TabsSection = () => {
-  //==============================프로필 탭 관련
+  //프로필 탭 관련
   const [activeTab, setActiveTab] = useState("Posts");
+
   return (
     <Container>
       {/* 탭 UI를 표시하고 조작할 수 있도록 props를 넘겨주는 구조 */}

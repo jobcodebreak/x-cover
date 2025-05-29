@@ -6,19 +6,21 @@ import { selectUserRecommendations } from "../../../../slices/userRecommendation
 import { selectPosts } from "../../../../slices/postsSlice";
 
 const PostsSection = () => {
-  //==============================반복 횟수 상태 추가
+  //반복 횟수 상태 추가
   const [userRepeatCount, setUserRepeatCount] = useState(1);
-  //==============================Show more 클릭 시 반복 수 증가
+
+  //Show more 클릭 시 반복 수 증가
   const handleShowMore = () => {
     setUserRepeatCount((prev) => prev + 1);
   };
-  //==============================useSelector사용해 상태 가져오기
-  const UR = useSelector(selectUserRecommendations);
-  const Po = useSelector(selectPosts);
+
+  //useSelector사용해 상태 가져오기
+  const userRecommendation = useSelector(selectUserRecommendations);
+  const post = useSelector(selectPosts);
 
   return (
     <Container>
-      {Po.map((post, index) => (
+      {post.map((post, index) => (
         <PostCard
           key={index}
           profileImage={post.profileImage}
@@ -35,7 +37,7 @@ const PostsSection = () => {
         <UserRecommendList>
           {/* 유저 리스트를 userRepeatCount만큼 반복해서 화면에 보여주고, 각각을 UserRecommendItem 컴포넌트로 만들어 렌더링 */}
           {Array.from({ length: userRepeatCount }).flatMap((_, i) =>
-            UR.map((user) => (
+            userRecommendation.map((user) => (
               <UserRecommendItem key={`${user.id}-${i}`}>
                 <SectionAvatar src={user.avatar} alt={user.name} />
                 <div>
